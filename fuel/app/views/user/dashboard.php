@@ -34,7 +34,7 @@
 								<div class="added-by">
 									&nbsp;
 								</div>
-								<a style="border: 2px dashed #aaa; background-image:url(/assets/img/add-quest.png)" href="#addProductModal" class="dash-product-image-div" data-toggle="modal">
+								<a style="border: 2px dashed #aaa; background-image:url(/assets/img/add-quest.png)" href="#questModal" class="dash-product-image-div" data-toggle="modal">
 								</a>
 							</div>
 					</div>
