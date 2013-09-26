@@ -50,6 +50,17 @@ class Controller_App extends Controller_Base
 
 	private function _init_user()
 	{
+
+		// $p = Hybrid_Auth::getConnectedProviders();
+		// $c = count($p);
+		// throw new Exception("Error Processing Request $c", 1);
+		
+		// if (! Hybrid_Auth::isConnectedWith('facebook'))
+		// {
+		// 	throw new Exception("Error Processing Request", 1);
+		// }
+
+
 		if ($this->auth->check())
 		{
 			$user_id = $this->auth->get_user_id();
