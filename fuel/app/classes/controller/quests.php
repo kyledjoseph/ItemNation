@@ -52,7 +52,7 @@ class Controller_Quests extends Controller_App
 		}
 
 		// clear notifications
-		if ($this->user->id == $quest->user_id)
+		if ($this->user_logged_in() and $this->user->id == $quest->user_id)
 		{
 			$quest->mark_notifications_seen();
 		}
