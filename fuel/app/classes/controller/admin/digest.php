@@ -18,8 +18,9 @@ class Controller_Admin_Digest extends Controller_Admin
 		}
 
 		$this->template->body = View::forge('admin/digest/preview', array(
-			'digests' => $digests,
-			'date'    => $date,
+			'digests'       => $digests,
+			'total_digests' => count($digests),
+			'date'          => $date,
 		));
 
 	}

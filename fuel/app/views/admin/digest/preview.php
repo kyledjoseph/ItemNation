@@ -1,7 +1,12 @@
 
 
-	<h2><?= count($digests) . ' pending for ' . $date ?></h2>
-	<?= Html::anchor('admin/digest/send', 'send digests', array('class' => 'btn btn-primary')) ?>
+	<h2><?= $total_digests . ' pending for ' . $date ?></h2>
+	
+
+	<?php if ($total_digests > 0): ?>
+	<?= Html::anchor("admin/digest/send/{$date}", 'send digests', array('class' => 'btn btn-primary')) ?>
+	<?php endif; ?>
+
 	<hr>
 	
 	<?php foreach ($digests as $digest): ?>
