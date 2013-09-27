@@ -1,13 +1,12 @@
 
-	<?php foreach ($quests_with_notifications as $quest): ?>
-
+	<h2><?= $digest->title() ?></h2>
+	<p>
+		<?php foreach ($digest->get_quests() as $quest): ?>
 			<?= Html::anchor($quest->full_url(), $quest->name()) ?>
-
-			<?php foreach ($quest->get_notifications_on_date($date) as $notification): ?>
-			<?php $event = $notification->get_event() ?>
-	
-				<?= $notification->text() ?>
-				
+			<ul>
+			<?php foreach ($quest->get_notifications_on_date($digest->date) as $notification): ?>
+				<li><?= $notification->text() ?></li>
 			<?php endforeach; ?>
-
-	<?php endforeach; ?>
+			</ul>
+		<?php endforeach; ?>
+	</p>

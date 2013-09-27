@@ -93,9 +93,6 @@ class Auth_Login_SiteAuth extends \Auth_Login_Driver
 			}
 		}
 
-
-		
-
 		// no valid login when still here, ensure empty session and optionally set guest_login
 		$this->user = \Config::get('siteauth.guest_login', true) ? static::$guest_login : false;
 		\Session::delete('username');
