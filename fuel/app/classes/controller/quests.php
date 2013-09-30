@@ -209,6 +209,7 @@ class Controller_Quests extends Controller_App
 		$post  = $this->post_data('name', 'description', 'purchase_within');
 
 		$quest = $this->user->create_quest($post->name, $post->description, $post->purchase_within);
+		$this->user->mark_notice_seen('start_quest');
 		
 		$this->redirect($quest->url());
 	}

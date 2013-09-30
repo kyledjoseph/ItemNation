@@ -34,7 +34,7 @@ class Controller_Admin_Digest extends Controller_Admin
 		{
 			$digest = new Notification_Digest($user, $date);
 			
-			if ($digest->has_notifications())
+			if ($digest->has_notifications() and $digest->user->receives_notification('digest'))
 			{
 				$digest->send();
 				array_push($digests, $digest);

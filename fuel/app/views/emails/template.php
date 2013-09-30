@@ -18,6 +18,6 @@
 	</div>
 </div>
 <div class="unsubscribe">
-	<p style="text-align:center;">You're receving this message because you signed up at ShopGab.com. <?= Html::anchor('unsubscribe', 'Unsubscribe by clicking here') ?>.</p>
+	<p style="text-align:center;">You're receving this message because you signed up at ShopGab.com. If you do not wish to receive notifications, <?= Html::anchor('user/account', 'update your notification settings by clicking here') ?>.</p>
 </div>
 </html>

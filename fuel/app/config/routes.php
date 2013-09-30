@@ -12,9 +12,8 @@ return array(
 	'register'                 => 'user/register',
 	'forgot'                   => 'user/forgot',
 	'reset/(:segment)'         => 'user/reset/$1',
+	'account/(:any)'           => 'user/$1',
 	'account'                  => 'user/account',
-	'account/avatar'           => 'user/avatar',
-	'account/password'         => 'user/password',
 
 	'quest/create'                        => 'quests/create',
 	'quest/(:segment)/remove/(:segment)'  => 'quests/remove/$1/$2',

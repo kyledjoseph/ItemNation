@@ -11,7 +11,8 @@
 	
 	<?php foreach ($digests as $digest): ?>
 
-		<h4><?= $digest->user->display_name() ?> (<?= $digest->user->email ?>) <?= $digest->total_notifications() ?></h4>
+		<h4><?= Html::anchor($digest->user->admin_url(), $digest->user->display_name()) ?> (<?= $digest->user->email ?>)</h4>
+		<p><?= ! $digest->user->receives_notification('digest') ? '&gt; user does not receive notifications' : null ?></p>
 		<p><?= $digest->title() ?></p>
 		<p>
 			<?php foreach ($digest->get_quests() as $quest): ?>

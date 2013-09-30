@@ -12,6 +12,8 @@ class Controller_Friends extends Controller_App
 
 	public function get_index()
 	{
+		$this->user->mark_notice_seen('view_friends');
+
 		$this->add_modal(View::forge('user/modal/start_quest'));
 		$this->add_modal(View::forge('friends/modal/invite'));
 		
