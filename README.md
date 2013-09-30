@@ -29,26 +29,30 @@ The latest sql dump can be found in the _db folder in the root of the repository
 
 #### 4. Setup Local Domain
 
-Edit /private/etc/hosts (you will need to use sudo) ex:
+Edit /private/etc/hosts (you will need to use sudo).
 
     sudo nano /private/etc/hosts
     > password:
 
-Add the following line to the end of the hosts file:
+Point `127.0.0.1` to `itemnation.dev` in your hosts file.
 
     127.0.0.1 itemnation.dev
 
 ## Development
 
-Our development cycle is a hybrid between [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) and [gitflow](http://nvie.com/posts/a-successful-git-branching-model/), and can be broken into a twelve-step process:
+Our development cycle is a hybrid between [GitHub flow](http://scottchacon.com/2011/08/31/github-flow.html) and [gitflow](http://nvie.com/posts/a-successful-git-branching-model/), and can be broken into a eight-step process:
 
 #### 1. Milestone
 
-Milestones dictate the release of issue resolutions, and can be either on the weekly cycle (Wednesdays during our development meeting) or off-cycle (as soon as possible). The weekly milestones contain issues that should be completed by Tuesday at midnight, whereas the [urgent](https://github.com/kyledjoseph/itemnation/issues?milestone=20) milestone contains issues that should be completed as soon as possible. We also have a [Wishlist](https://github.com/kyledjoseph/itemnation/issues?milestone=9) for issues that we'd eventually like to resolve, but aren't currently scheduled.
+Milestones dictate the release of issue resolutions, and can fall into one of three categories:
+
+* **[Urgent:](https://github.com/kyledjoseph/itemnation/issues?milestone=20)** Release an issue resolution as soon as possible.
+* **[Weekly:](https://github.com/kyledjoseph/shopgab/issues/milestones)** Create a pull request to release an issue resolution on Wednesday.
+* **[Wishlist:](https://github.com/kyledjoseph/shopgab/issues?milestone=9&state=open)** Wait until these issues are assigned a weekly or urgent milestone.
 
 #### 2. Issue
 
-**Always** have an *issue* for what you're working on. Issue titles should be actionable ("Fix broken page" instead of "Page is broken") and issue names should be similar to the following examples:
+Always have an issue for what you're working on. Issue titles should be actionable ("Fix broken page" instead of "Page is broken") and issue names should be similar to the following examples:
 
 * **Bug**
   * Fix dashboard
@@ -61,7 +65,7 @@ Milestones dictate the release of issue resolutions, and can be either on the we
 
 #### 3. Branch
 
-**Always** have an *branch* for the branch you're working on. For example, to work on issue #12345 you'd use the following:
+Always have an branch for what you're working on. For example, to work on issue #12345 you'd use the following:
 
 ```
 git checkout master      # switch to master
@@ -71,50 +75,34 @@ git push -u origin 12345 # push to github and set upstream
 
 #### 4. Commit
 
-Commit to your branch, and push.
+Commit to your branch and push.
 
 ```
 git commit -m "Delete everything we've ever worked on" # descriptive commit message
 git push # push to github
 ```
 
-#### 5. Pull Request to `test`
+#### 5. Merge into `test`
 
-When an issue resolution is completely finished, convert the issue into a pull request. **Always** request for your branch to be merged into `test`.
-
-```
-hub pull-request -i 12345 -b kyledjoseph:test -h kyledjoseph:12345
-```
-
-If you're solving a weekly issue, you're done! Your pull request will be merged into `test` after QA at the weekly meeting.
-
-If you're solving an [urgent](https://github.com/kyledjoseph/itemnation/issues?milestone=20) continue to step six.
-
-#### 6. Merge to `test`
-
-[Merge one pull request](https://github.com/kyledjoseph/shopgab/pulls) at a time. If necessary, do this through the CLI:
+Merge `test` into your issue resolution branch.
 
 ```
 git fetch origin   # fetch new changes
+# WEEKLY ISSUES ONLY
 git checkout 12345 # checkout issue branch
-git merge test     # make sure the branch is up to date
+git merge test     # make sure your branch is up to date
+# /WEEKLY ISSUES ONLY
 git checkout test  # checkout test branch
 git merge 12345    # merge changes
 ```
 
-#### 7. Deploy to `test`
+#### 6. Test
 
-Deploy this merge to the testing server:
+Test any features that your branch may have affected.
 
 ```
-git checkout test    # checkout test branch
-git pull origin test # pull recent changes
-git push test test   # push to test server
+git push test test # deploy to test server
 ```
-
-#### 8. Test
-
-Test any features that your issue branch may have affected:
 
 * Login
 * View Quest
@@ -123,38 +111,25 @@ Test any features that your issue branch may have affected:
 * Rate
 * Chat
 * Add Product
-* etc
+* etc.
 
-#### 9. Pull request to `master`
+#### 7. Merge `master`
 
-Send a pull request to merge your issue branch (**not** `test`) into `master`, using either the [GUI](https://github.com/kyledjoseph/shopgab/compare/master...master) or the CLI:
-
-```
-hub pull-request -b kyledjoseph:master -h kyledjoseph:12345
-```
-
-#### 10. Merge to `master`
-
-[Merge your pull request](https://github.com/kyledjoseph/shopgab/pulls) at a time. If necessary, do this through the CLI:
+Merge `master` into your branch.
 
 ```
-git fetch origin   # fetch new changes
-git checkout 12345 # checkout issue branch
-git merge test     # make sure the branch is up to date
-git checkout test  # checkout test branch
-git merge 12345    # merge changes
+git fetch origin
+git checkout 12345
+git merge master
+git push origin 12345
 ```
 
-#### 11. Deploy to `master`
+#### 8. Pull request
 
-Deploy this merge to the deployment server:
+Create a pull request from your branch into `master`. If at any point your issue isn't able to be automatically merged, repeat step 7.
 
 ```
-git checkout master    # checkout test branch
-git pull origin master # pull recent changes
-git push deploy master # push to test server
+hub pull-request -i 12345 -b kyledjoseph:master -h kyledjoseph:12345
 ```
 
-#### 12. Relax
-
-You made it. You survived. Refill your coffee and move to the next issue.
+If you're solving an [urgent](https://github.com/kyledjoseph/itemnation/issues?milestone=20) issue, you can merge this immediately and deploy. Otherwise, the pull request will be merged at the weekly meeting.
