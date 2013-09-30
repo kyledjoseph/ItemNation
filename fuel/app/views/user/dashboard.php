@@ -2,7 +2,7 @@
 		<div class="col-12">
 			<ul class="nav nav-tabs">
 				<li class="active"><?= Html::anchor('/', 'My Quests') ?></li>
-				<li class="tour-friends-tab" data-container="body" data-placement="bottom" data-content="Check out what your friends are looking for." data-original-title="" title=""><?= Html::anchor('friends', 'Friends') ?></li>
+				<li class="<?= $user->has_seen_notice('view_friends') ? : 'tour-quest-btn' ?>" data-container="body" data-placement="bottom" data-content="Check out what your friends are looking for." data-original-title="" title=""><?= Html::anchor('friends', 'Friends') ?></li>
 			</ul>
 		</div>
 		<div class="col-12">
@@ -15,7 +15,7 @@
 						</select>
 					</div>
 					<div class="col-12 col-sm-4 pad-top">
-						<button href="#questModal" class="btn btn-success pull-right tour-quest-btn" data-container="body" data-placement="top" data-content="Get started looking for your first product." data-original-title="" title="" data-toggle="modal">Start a new Quest!</button>
+						<button href="#questModal" class="btn btn-success pull-right <?= $user->has_seen_notice('start_quest') ? : 'tour-quest-btn' ?>" data-container="body" data-placement="top" data-content="Get started looking for your first product." data-original-title="" title="" data-toggle="modal">Start a new Quest!</button>
 					</div>
 				</div>
 				<div class="row pad-top">

@@ -96,6 +96,13 @@ class Model_User extends \Orm\Model
 			'cascade_save' => true,
 			'cascade_delete' => true,
 		),
+		'notices' => array(
+			'key_from' => 'id',
+			'model_to' => 'Model_User_Notice',
+			'key_to' => 'user_id',
+			'cascade_save' => true,
+			'cascade_delete' => true,
+		),
 	);
 
 	protected static $_observers = array(
@@ -330,6 +337,30 @@ class Model_User extends \Orm\Model
 	public function has_password()
 	{
 		return ! empty($this->password);
+	}
+
+	/**
+	 *
+	 */
+	public function has_seen_notice($type)
+	{
+		return Model_User_Notice::query()->where('user_id', $this->id)->where('type', $type)->count() > 0;
+	}
+
+	/**
+	 *
+	 */
+	public function mark_notice_seen($type)
+	{
+		if ($this->has_seen_notice($type))
+		{
+			return true;
+		}
+
+		$notice = new Model_User_Notice;
+		$notice->user_id = $this->id;
+		$notice->type    = $type;
+		return $notice->save();
 	}
 
 	/**
