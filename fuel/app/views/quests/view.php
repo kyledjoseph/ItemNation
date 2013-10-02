@@ -5,9 +5,6 @@
 		<div class="col-12 col-sm-5 col-lg-6">
 			<h4 class="help-me">Please help me find a <span class="product-name"><?= $quest->name() ?></span></h4>
 		</div>
-		<div class="col-12 col-sm-5 col-lg-4">
-			<button id="private-public" class="hidden btn btn-primary btn-block marg-bottom quest-private"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</button>
-		</div>
 	</div>
 	<div class="row">
 		<div class="col-3 col-sm-2 col-lg-2">
@@ -17,6 +14,9 @@
 			<div class="bubble">
 				<p><?= $quest->description() ?></p>
 				<?php if (isset($user) and $quest->belongs_to_user($user->id)): ?>
+				<script type="text/javascript">
+				var self_quest = true;
+				</script>
 				<?= Html::anchor('#questModal', 'Edit Quest', array('class' => '', 'data-toggle' => 'modal')) ?> |
 				<?= Html::anchor('#deleteQuestModal', 'Delete Quest', array('class' => '', 'data-toggle' => 'modal')) ?> 
 			<?php endif; ?>
@@ -33,6 +33,13 @@
 	<div class="col-12 col-sm-4 col-lg-3 col-sm-offset-1 align-center">
 		<?php if (isset($user) and $quest->belongs_to_user($user->id)): ?>
 		<div class="pushups">
+			
+			<?php if ($quest->is_public): ?>
+				<a id="private-public" class="btn btn-primary btn-block marg-bottom quest-private" href="<?= Uri::create($quest->url("access/private")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Public</a>
+			<?php else: ?>
+				<a id="private-public" class="btn btn-primary btn-block marg-bottom quest-private" href="<?= Uri::create($quest->url("access/public")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</a>
+			<?php endif; ?>
+
 			<button id="fb_share" class="marg-bottom push-center btn btn-fb btn-block push-center quest-invite"
 			data-picture="<?= $quest->default_thumb_url() ?>"
 			data-link="<?= $quest->full_url() ?>"
@@ -55,7 +62,7 @@
 			<?= Form::close() ?>
 		<?php endif; ?>
 		<?php if (isset($user)): ?>
-			<button style="position: relative; top: -58px;" href="#addProductModal" data-toggle="modal" class="btn btn-primary pull-right">Add Product</button>
+			<button style="position: relative; top: -58px;" href="#addProductModal" data-toggle="modal" class="btn btn-primary pull-right mx-install-extension">Add Product</button>
 		<?php else: ?>
 			<button style="position: relative; top: -58px;" href="#registerModal" data-toggle="modal" class="btn btn-primary pull-right">Add Product</button>
 		<?php endif; ?>
@@ -94,11 +101,11 @@
 					</div>
 					<div class="pull-right fix-pull-right">
 						<?php if (isset($user)): ?>
-						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->like_url(), '<i class="icon-thumbs-up-alt faded no-dec icon-large"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp; 
-						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <?= Html::anchor($quest_product->dislike_url(), '<i class="icon-thumbs-down-alt faded no-dec icon-large"></i>', array('title' => $quest_product->list_user_dislikes(), 'class' => 'user_product_vote')) ?>
+						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->like_url(), '<i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp; 
+						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <?= Html::anchor($quest_product->dislike_url(), '<i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_dislikes(), 'class' => 'user_product_vote')) ?>
 					<?php else: ?>
-					<span class="badge"><?= $quest_product->total_likes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-up-alt faded no-dec icon-large"></i></a> &nbsp; 
-					<span class="badge"><?= $quest_product->total_dislikes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-down-alt faded no-dec icon-large"></i></a>
+					<span class="badge"><?= $quest_product->total_likes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i></a> &nbsp; 
+					<span class="badge"><?= $quest_product->total_dislikes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i></a>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -135,11 +142,11 @@
 						</div>
 					<?php endforeach; ?>
 
-					<?= Form::open(array('action' => $quest_product->comment_url(), 'class' => 'comment',)) ?>
+					<?= Form::open(array('action' => $quest_product->comment_url(), 'class' => 'comment mx-comment-form',)) ?>
 					<div class="input-group">
 						<input name="comment" type="text" class="form-control" placeholder="What do you think?">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="submit">Comment</button>
+							<button class="mx-comment-button btn btn-default" type="submit">Comment</button>
 						</span>
 					</div>
 					<?= Form::close() ?>
@@ -162,9 +169,8 @@
 		<div class="added-by">
 			&nbsp;
 		</div>
-
 		<?php if (isset($user)): ?>
-			<a style="border: 2px dashed #aaa; background-image:url(/assets/img/add-product.png)" href="#addProductModal" class="quest-product-image-div" data-toggle="modal">
+			<a style="border: 2px dashed #aaa; background-image:url(/assets/img/add-product.png)" href="#addProductModal" class="quest-product-image-div mx-install-extension" data-toggle="modal">
 		<?php else: ?>
 			<a style="border: 2px dashed #aaa; background-image:url(/assets/img/add-product.png)" href="#registerModal" class="quest-product-image-div" data-toggle="modal">
 		<?php endif; ?>
@@ -219,9 +225,8 @@
 
 	<div class="row">
 		<div class="col-12">
-			<?= Form::open(array('action' => $quest->url('message'))) ?>
+			<?= Form::open(array('action' => $quest->url('message'), 'class' => 'mx-chat-form')) ?>
 			<div class="input-group">
-
 				<?php if (isset($user)): ?>
 				<input name="message" type="text" class="form-control">
 				<?php else: ?>

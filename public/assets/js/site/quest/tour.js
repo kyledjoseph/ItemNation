@@ -103,3 +103,8 @@ if ($.cookie('old_user') == 'false' || $.cookie('old_user') == undefined) {
 }
 
 $(".chat").scrollTop($(".chat")[0].scrollHeight);
+mixpanel.track("View Quest");
+
+if (self_quest) {
+    mixpanel.track("View Quest (self)");
+}

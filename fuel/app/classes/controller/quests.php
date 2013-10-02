@@ -45,16 +45,19 @@ class Controller_Quests extends Controller_App
 		$quest = $this->get_quest_by_url($quest_url);
 		$sort  = Input::get('order');
 
-		// private quest access
-		if ($quest->is_private() and ! $quest->is_participant($this->user->id))
+		if ($this->user_logged_in())
 		{
-			$this->redirect('/');
-		}
+			// clear notifications
+			if ($this->user->id == $quest->user_id)
+			{
+				$quest->mark_notifications_seen();
+			}
 
-		// clear notifications
-		if ($this->user_logged_in() and $this->user->id == $quest->user_id)
-		{
-			$quest->mark_notifications_seen();
+			// add users to private quests
+			if ($quest->is_private() and ! $quest->is_participant($this->user->id))
+			{
+				$quest->add_participant($this->user->id);
+			}
 		}
 
 		// quest product sort

@@ -39,7 +39,7 @@ return array(
 	'match_ua'			=> true,
 
 	// cookie domain  (optional, default = '')
-	'cookie_domain' 	=> 'test.shopgab.com',
+	'cookie_domain' 	=> 'shopgab.com',
 
 	// cookie path  (optional, default = '/')
 	'cookie_path'		=> '/',
