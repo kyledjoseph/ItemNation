@@ -14,6 +14,9 @@
 			<div class="bubble">
 				<p><?= $quest->description() ?></p>
 				<?php if (isset($user) and $quest->belongs_to_user($user->id)): ?>
+				<script type="text/javascript">
+				var self_quest = true;
+				</script>
 				<?= Html::anchor('#questModal', 'Edit Quest', array('class' => '', 'data-toggle' => 'modal')) ?> |
 				<?= Html::anchor('#deleteQuestModal', 'Delete Quest', array('class' => '', 'data-toggle' => 'modal')) ?> 
 			<?php endif; ?>
@@ -58,7 +61,7 @@
 			<?= Form::select('order', $quest->active_sort(), $quest->sort_options(), array('class' => 'form-control')) ?>
 			<?= Form::close() ?>
 		<?php endif; ?>
-		<button style="position: relative; top: -58px;" href="#addProductModal" data-toggle="modal" class="btn btn-primary pull-right">Add Product</button>
+		<button style="position: relative; top: -58px;" href="#addProductModal" data-toggle="modal" class="btn btn-primary pull-right mx-install-extension">Add Product</button>
 
 		<div class="clear pad-bottom"></div>
 		<div class="row product-rows">
@@ -89,11 +92,11 @@
 					<a class="no-dec" href="#commentsFor<?= $product_i ?>" data-toggle="modal"><span class="badge"><?= $quest_product->total_comments() ?></span> <i class="icon-comments-alt faded icon-large"></i><a>
 					</div>
 					<div class="pull-right fix-pull-right">
-						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->like_url(), '<i class="icon-thumbs-up-alt faded no-dec icon-large"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp; 
-						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <?= Html::anchor($quest_product->dislike_url(), '<i class="icon-thumbs-down-alt faded no-dec icon-large"></i>', array('title' => $quest_product->list_user_dislikes(), 'class' => 'user_product_vote')) ?>
+						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->like_url(), '<i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp; 
+						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <?= Html::anchor($quest_product->dislike_url(), '<i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_dislikes(), 'class' => 'user_product_vote')) ?>
 					<?php else: ?>
-					<span class="badge"><?= $quest_product->total_likes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-up-alt faded no-dec icon-large"></i></a> &nbsp; 
-					<span class="badge"><?= $quest_product->total_dislikes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-down-alt faded no-dec icon-large"></i></a>
+					<span class="badge"><?= $quest_product->total_likes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i></a> &nbsp; 
+					<span class="badge"><?= $quest_product->total_dislikes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i></a>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -130,11 +133,11 @@
 						</div>
 					<?php endforeach; ?>
 
-					<?= Form::open(array('action' => $quest_product->comment_url(), 'class' => 'comment',)) ?>
+					<?= Form::open(array('action' => $quest_product->comment_url(), 'class' => 'comment mx-comment-form',)) ?>
 					<div class="input-group">
 						<input name="comment" type="text" class="form-control" placeholder="What do you think?">
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="submit">Comment</button>
+							<button class="mx-comment-button btn btn-default" type="submit">Comment</button>
 						</span>
 					</div>
 					<?= Form::close() ?>
@@ -157,7 +160,7 @@
 		<div class="added-by">
 			&nbsp;
 		</div>
-		<a style="border: 2px dashed #aaa; background-image:url(/assets/img/add-product.png)" href="#addProductModal" class="quest-product-image-div" data-toggle="modal">
+		<a style="border: 2px dashed #aaa; background-image:url(/assets/img/add-product.png)" href="#addProductModal" class=" mx-install-extension quest-product-image-div" data-toggle="modal">
 		</a>
 	</div>
 </div>
@@ -209,9 +212,8 @@
 
 	<div class="row">
 		<div class="col-12">
-			<?= Form::open(array('action' => $quest->url('message'))) ?>
+			<?= Form::open(array('action' => $quest->url('message'), 'class' => 'mx-chat-form')) ?>
 			<div class="input-group">
-
 				<?php if (isset($user)): ?>
 				<input name="message" type="text" class="form-control">
 				<?php else: ?>

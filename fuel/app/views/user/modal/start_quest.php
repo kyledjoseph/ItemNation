@@ -22,7 +22,7 @@
 			</div>
 			<div class="modal-footer footer-in-form">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class="btn btn-primary">Start Quest</button>
+				<button class="mx-start-quest btn btn-primary">Start Quest</button>
 			</div>
 		</form>
 	</div>

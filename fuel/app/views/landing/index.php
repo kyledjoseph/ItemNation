@@ -182,6 +182,7 @@ mixpanel.init("0c06e22671690f1006e02a4d071839e9");</script><!-- end Mixpanel -->
   ga('create', 'UA-42842086-1', 'shopgab.com');
   ga('send', 'pageview');
 
+  mixpanel.track("Land");
 </script>
     <?= Casset::render_js() ?>
   </body>
