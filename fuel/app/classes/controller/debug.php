@@ -15,6 +15,31 @@ class Controller_Debug extends Controller_App
 			
 			if ($message->has_notifications())
 			{
+				
+				echo var_export($message->get_quests());
+				echo '<hr>';
+
+				$total++;
+			}
+		}
+
+		return 'total: ' . $total;
+	}
+
+
+
+	public function get_senddigest()
+	{
+		$date     = '2013-09-21';
+		$users    = Model_User::query()->get();
+		$total = 0;
+
+		foreach ($users as $user)
+		{
+			$message = new Notification_Digest($user, $date);
+			
+			if ($message->has_notifications())
+			{
 				$message->send();
 				$total++;
 			}
@@ -22,6 +47,15 @@ class Controller_Debug extends Controller_App
 
 		return 'total: ' . $total;
 	}
+
+
+
+
+
+
+
+
+
 
 	public function get_send()
 	{

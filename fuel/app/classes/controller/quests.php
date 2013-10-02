@@ -52,7 +52,7 @@ class Controller_Quests extends Controller_App
 		}
 
 		// clear notifications
-		if ($this->user->id == $quest->user_id)
+		if ($this->user_logged_in() and $this->user->id == $quest->user_id)
 		{
 			$quest->mark_notifications_seen();
 		}
@@ -209,6 +209,7 @@ class Controller_Quests extends Controller_App
 		$post  = $this->post_data('name', 'description', 'purchase_within');
 
 		$quest = $this->user->create_quest($post->name, $post->description, $post->purchase_within);
+		$this->user->mark_notice_seen('start_quest');
 		
 		$this->redirect($quest->url());
 	}

@@ -25,21 +25,24 @@ class Model_Analytics extends \Model
 
 
 	/**
-	 * Report data
+	 * Report data - Users
 	 */
 	public function total_signups()
 	{
 		return Model_User::query()->where('created_at', 'between', array($this->start_timestamp, $this->until_timestamp))->count();
 	}
 
+	public function get_signups()
+	{
+		return Model_User::query()->where('created_at', 'between', array($this->start_timestamp, $this->until_timestamp))->get();
+	}
+
+	/**
+	 * Report data - Quests
+	 */
 	public function total_quests_created()
 	{
 		return Model_Quest::query()->where('created_at', 'between', array($this->start_timestamp, $this->until_timestamp))->count();
-	}
-
-	public function total_emails_sent()
-	{
-		return Service_Email_Log::query()->where('created_at', 'between', array($this->start_timestamp, $this->until_timestamp))->count();
 	}
 
 	public function total_product_comments()
@@ -55,6 +58,35 @@ class Model_Analytics extends \Model
 	public function total_comments_added()
 	{
 		return $this->total_product_comments() + $this->total_quest_messages();
+	}
+
+	public function get_quests()
+	{
+		return Model_Quest::query()->where('created_at', 'between', array($this->start_timestamp, $this->until_timestamp))->get();
+	}
+
+	public function get_quest_products()
+	{
+		return Model_Quest_Product::query()->where('created_at', 'between', array($this->start_timestamp, $this->until_timestamp))->get();
+	}
+
+	public function get_quest_product_comments()
+	{
+		return Model_Quest_Product_Comment::query()->where('created_at', 'between', array($this->start_timestamp, $this->until_timestamp))->get();
+	}
+
+	public function get_quest_messages()
+	{
+		return Model_Quest_Message::query()->where('created_at', 'between', array($this->start_timestamp, $this->until_timestamp))->get();
+	}
+
+
+	/**
+	 * Report data - Emails
+	 */
+	public function total_emails_sent()
+	{
+		return Service_Email_Log::query()->where('created_at', 'between', array($this->start_timestamp, $this->until_timestamp))->count();
 	}
 
 
@@ -94,6 +126,11 @@ class Model_Analytics extends \Model
 	{
 		$d = explode('-', $datestamp);
 		$this->until_timestamp = mktime(23, 59, 59, $d[1], $d[2], $d[0]);
+	}
+
+	public function start_date()
+	{
+		return $this->start_date;
 	}
 
 	public function start_date_formatted($format = "r")
@@ -161,6 +198,74 @@ class Model_Analytics extends \Model
 	{
 		$date = new DateTime();
 		return $date->format("d");
+	}
+
+	public function get_csv($type)
+	{
+		if ($type == 'stats')
+		{
+			$csv = 'date,total_signups,total_quests_created,total_emails_sent,total_product_comments,total_quest_messages,total_comments_added' . "\n";
+			$csv.= $this->start_date . ',';
+			$csv.= $this->total_signups() . ',';
+			$csv.= $this->total_quests_created() . ',';
+			$csv.= $this->total_emails_sent() . ',';
+			$csv.= $this->total_product_comments() . ',';
+			$csv.= $this->total_quest_messages() . ',';
+			$csv.= $this->total_comments_added();
+			$csv.= "\n";
+			return $csv;
+		}
+		
+		if ($type == 'users')
+		{
+			$csv = 'id,username,email,display_name,avatar_type,last_login,fb_friends_last_updated,created_at,updated_at' . "\n";
+			foreach ($this->get_signups() as $user)
+			{
+				$csv.= "{$user->id},{$user->username},{$user->email},{$user->display_name},{$user->avatar_type},{$user->last_login},{$user->fb_friends_last_updated},{$user->created_at},{$user->updated_at}\n";
+			}
+			return $csv;
+		}
+
+		if ($type == 'quests')
+		{
+			$csv = 'id,url,user_id,user_name,name,description,purchase_within,purchase_by,default_product_id,is_public,created_at,updated_at' . "\n";
+			foreach ($this->get_quests() as $quest)
+			{
+				$csv.= "{$quest->id},{$quest->url},{$quest->user_id},{$quest->user->display_name()},{$quest->name},{$quest->description},{$quest->purchase_within},{$quest->purchase_by},{$quest->default_product_id},{$quest->is_public},{$quest->created_at},{$quest->updated_at}";
+			}
+			return $csv;
+		}
+
+		if ($type == 'products')
+		{
+			$csv = 'id,quest_id,quest_name,quest_user_id,quest_user_name,product_id,description,total_likes,total_dislikes,added_by,added_by_name,created_at,updated_at' . "\n";
+			foreach ($this->get_quest_products() as $quest_product)
+			{
+				$csv.= "{$qest_product->id},{$qest_product->quest_id},{$qest_product->quest->name},{$qest_product->quest->user_id},{$qest_product->quest->user->display_name()},{$qest_product->product_id},{$qest_product->description},{$qest_product->total_likes},{$qest_product->total_dislikes},{$qest_product->added_by},{$qest_product->user->display_name()},{$qest_product->created_at},{$qest_product->updated_at}";
+			}
+			return $csv;
+		}
+	
+		if ($type == 'comments')
+		{
+			$csv = 'id,quest_product_id,quest_product_name,user_id,user_name,comment,created_at,updated_at' . "\n";
+			foreach ($this->get_quest_product_comments() as $comment)
+			{
+				$csv.= "{$comment->id},{$comment->quest_product_id},{$comment->quest_product->quest->name},{$comment->user_id},{$comment->user->display_name()},{$comment->comment},{$comment->created_at},{$comment->updated_at}";
+			}
+			return $csv;
+		}
+
+		if ($type == 'messages')
+		{
+
+			$csv = 'id,quest_id,quest_name,user_id,user_name,body,created_at,updated_at' . "\n";
+			foreach ($this->get_quest_messages() as $message)
+			{
+				$csv.= "{$message->id},{$message->quest_id},{$message->quest->name},{$message->user_id},{$message->user->display_name()},{$message->body},{$message->created_at},{$message->updated_at}";
+			}
+			return $csv;
+		}
 	}
 
 }

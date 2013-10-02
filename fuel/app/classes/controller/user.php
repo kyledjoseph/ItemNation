@@ -419,6 +419,16 @@ class Controller_User extends Controller_App
 		$this->redirect('user/account', 'success', 'Account information updated');
 	}
 
+	public function post_notifications()
+	{
+		$post = $this->post_data('digest');
+
+		$send_digest = $post->digest == '1';
+		$this->user->set_notification('digest', $send_digest);
+
+		$this->redirect('user/account', 'success', 'Notification settings updated');
+	}
+
 	public function get_avatar($action, $network)
 	{
 		if ($network == 'facebook')

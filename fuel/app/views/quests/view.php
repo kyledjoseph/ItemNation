@@ -203,22 +203,29 @@
 </div>
 </div>
 
-<div class="row">
-	<div class="col-12">
-		<?= Form::open(array('action' => $quest->url('message'))) ?>
-		<div class="input-group">
-			<input name="message" type="text" class="form-control">
-			<span class="input-group-btn">
+	<div class="row">
+		<div class="col-12">
+			<?= Form::open(array('action' => $quest->url('message'))) ?>
+			<div class="input-group">
+
 				<?php if (isset($user)): ?>
-				<button class="chat-button btn btn-default" type="submit">Send</button>
-			<?php else: ?>
-			<button href="#registerModal" class="btn btn-default" data-toggle="modal">Send</button>
-		<?php endif; ?>
-	</span>
-</div>
-</form>
-</div>
-</div>
+				<input name="message" type="text" class="form-control">
+				<?php else: ?>
+				<input href="#registerModal" data-toggle="modal" name="message" type="text" class="form-control">
+				<?php endif; ?>
+
+				<span class="input-group-btn">
+					<?php if (isset($user)): ?>
+					<button class="chat-button btn btn-default" type="submit">Send</button>
+					<?php else: ?>
+					<button href="#registerModal" class="btn btn-default" data-toggle="modal">Send</button>
+					<?php endif; ?>
+				</span>
+			</div>
+			</form>
+		</div>
+	</div>
+
 </div>
 </div>
 </div>

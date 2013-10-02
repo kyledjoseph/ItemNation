@@ -1,6 +1,6 @@
 <div class="row">
 		<div class="col-12 col-sm-4">
-		<h2 class="header-underline">My Account</h4>
+		<h2 class="header-underline">My Account</h2>
 		<?= Form::open(array('class' => 'form-horizontal')) ?>
 			
 			<div class="control-group account-form">
@@ -33,6 +33,23 @@
 		
 		<hr>
 
+		<h3 class="header-underline">Notifications</h3>
+		<?= Form::open(array('action' => 'account/notifications', 'class' => 'form-horizontal')) ?>
+			<div class="control-group account-form">
+				<div class="controls">
+					<input type="checkbox" name="digest" value="1" <?= $user->receives_notification('digest') ? 'checked="checked"' : null ?>> Daily Digest
+				</div>
+			</div>
+			<div class="control-group account-form">
+				<div class="controls">
+					<button class="btn btn-default marg-top">Update Notifications</button>
+				</div>
+			</div>
+		<?= Form::close() ?>
+
+		<hr>
+
+		<h3 class="header-underline">Profile Picture</h3>
 		<?= Form::open(array('action' => 'account/avatar', 'enctype' => 'multipart/form-data', 'class' => 'form-horizontal')) ?>
 			<div class="control-group account-form">
 				<label class="control-label" for="inputName"></label>
@@ -65,11 +82,11 @@
 		
 		<hr>
 
+		<h3 class="header-underline">Password</h3>
 		<?= Form::open(array('class' => 'form-horizontal')) ?>
 			<?php if ($user->has_password()): ?>
 
 			<div class="control-group">
-				<label class="control-label" for="inputPassword">Current Password:</label>
 				<div class="controls">
 					<span class="facebook-account"><?= Html::anchor('account/password', 'Change Password') ?></span>
 				</div>
@@ -78,7 +95,6 @@
 			<?php else: ?>
 
 			<div class="control-group">
-				<label class="control-label" for="inputPassword">Current Password:</label>
 				<div class="controls">
 					<span class="facebook-account"><?= Html::anchor('account/password', 'Set a Password') ?></span>
 				</div>
