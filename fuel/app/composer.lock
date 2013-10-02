@@ -11,21 +11,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cartalyst/sentry.git",
-                "reference": "7e7a7298b1293034fb531c5dc03cfe25dfdac0b1"
+                "reference": "1cf86553c9cf707722b8514d968345d927715e9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/7e7a7298b1293034fb531c5dc03cfe25dfdac0b1",
-                "reference": "7e7a7298b1293034fb531c5dc03cfe25dfdac0b1",
+                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/1cf86553c9cf707722b8514d968345d927715e9b",
+                "reference": "1cf86553c9cf707722b8514d968345d927715e9b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "illuminate/cookie": "4.0.*",
-                "illuminate/database": "4.0.*",
-                "illuminate/session": "4.0.*",
+                "illuminate/cookie": "~4",
+                "illuminate/database": "~4",
+                "illuminate/session": "~4",
                 "ircmaxell/password-compat": "1.0.*",
                 "mockery/mockery": "0.7.2"
             },
@@ -102,7 +102,7 @@
                 "laravel",
                 "security"
             ],
-            "time": "2013-09-09 12:08:22"
+            "time": "2013-10-02 05:24:00"
         },
         {
             "name": "hybridauth/hybridauth",
@@ -206,12 +206,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "dfe8575f331c29e87079963750663026afa3007b"
+                "reference": "63e46dfac33b15c2a4123ede2e2414af1770a02f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/dfe8575f331c29e87079963750663026afa3007b",
-                "reference": "dfe8575f331c29e87079963750663026afa3007b",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/63e46dfac33b15c2a4123ede2e2414af1770a02f",
+                "reference": "63e46dfac33b15c2a4123ede2e2414af1770a02f",
                 "shasum": ""
             },
             "require": {
@@ -259,7 +259,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2013-09-11 14:49:19"
+            "time": "2013-10-01 22:00:06"
         },
         {
             "name": "illuminate/events",
@@ -268,12 +268,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
-                "reference": "d3b84d3024f3671a33eb9388b3ff58e4b407c6ac"
+                "reference": "437008e79fe04704a86a1e7e19fae9eb4f7a68e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/events/zipball/d3b84d3024f3671a33eb9388b3ff58e4b407c6ac",
-                "reference": "d3b84d3024f3671a33eb9388b3ff58e4b407c6ac",
+                "url": "https://api.github.com/repos/illuminate/events/zipball/437008e79fe04704a86a1e7e19fae9eb4f7a68e0",
+                "reference": "437008e79fe04704a86a1e7e19fae9eb4f7a68e0",
                 "shasum": ""
             },
             "require": {
@@ -308,7 +308,7 @@
                     "role": "Developer"
                 }
             ],
-            "time": "2013-08-01 14:26:36"
+            "time": "2013-09-14 15:33:19"
         },
         {
             "name": "illuminate/support",
@@ -317,12 +317,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "5ba934d9c27b456202f3ae495971e467fb9a3f73"
+                "reference": "eec101e3a36159fe584a69a4b1d0c3eef9a263dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/5ba934d9c27b456202f3ae495971e467fb9a3f73",
-                "reference": "5ba934d9c27b456202f3ae495971e467fb9a3f73",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/eec101e3a36159fe584a69a4b1d0c3eef9a263dc",
+                "reference": "eec101e3a36159fe584a69a4b1d0c3eef9a263dc",
                 "shasum": ""
             },
             "require": {
@@ -359,7 +359,7 @@
                     "role": "Developer"
                 }
             ],
-            "time": "2013-08-27 16:09:54"
+            "time": "2013-10-01 18:20:36"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -538,13 +538,13 @@
             "version": "v2.0.2",
             "source": {
                 "type": "git",
-                "url": "git://github.com/videlalvaro/php-amqplib.git",
-                "reference": "v2.0.2"
+                "url": "https://github.com/videlalvaro/php-amqplib.git",
+                "reference": "682e3365f51c455f7a0bd32173d79922416fe9f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/v2.0.2",
-                "reference": "v2.0.2",
+                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/682e3365f51c455f7a0bd32173d79922416fe9f0",
+                "reference": "682e3365f51c455f7a0bd32173d79922416fe9f0",
                 "shasum": ""
             },
             "require": {

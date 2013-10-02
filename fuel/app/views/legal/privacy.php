@@ -61,3 +61,8 @@ The Privacy Policy is subject to change by Us at any time based on changes in th
 </p>
 </div>
 </div>
+<style type="text/css">
+.feedback-button {
+	display: none;
+}
+</style>

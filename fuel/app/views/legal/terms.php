@@ -92,3 +92,8 @@ The boldface paragraph headings in this Agreement are included for ease of refer
 </p>
 		</div>
 	</div>
+<style type="text/css">
+.feedback-button {
+	display: none;
+}
+</style>
