@@ -180,7 +180,7 @@ class Model_Quest extends \Orm\Model
 			}
 		}
 
-		return "//placehold.it/{$width}x{$height}/fff";
+		return "http://placehold.it/{$width}x{$height}/fff";
 	}
 
 
