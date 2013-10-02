@@ -71,20 +71,20 @@
 				<a href="<?= $product->product_url() ?>" class="quest-product-image-div" style="background-image:url(<?= $product->image_url(250, 220) ?>)" target="_blank">
 					<div class="product-name">
 						<div class="title-box"><?= $product->name() ?></div>
-						<span class="faded"><?= $product->price() ?>
-							<?php if (isset($user)): ?>
+						<span class="faded">
+							<?= $product->price() ?>
 						</span>
 					</div>
 				</a>
 				<?php if (isset($user) and $quest->belongs_to_user($user->id)): ?>
 				<a class="close quest-page" href="<?= $quest_product->remove_url() ?>">&times;</a>
 			<?php endif; ?>
-
 			<div class="row product-info">
 				<div class="pull-left fix-pull-left">
 					<a class="no-dec" href="#commentsFor<?= $product_i ?>" data-toggle="modal"><span class="badge"><?= $quest_product->total_comments() ?></span> <i class="icon-comments-alt faded icon-large"></i><a>
 					</div>
 					<div class="pull-right fix-pull-right">
+						<?php if (isset($user)): ?>
 						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->like_url(), '<i class="icon-thumbs-up-alt faded no-dec icon-large"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp; 
 						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <?= Html::anchor($quest_product->dislike_url(), '<i class="icon-thumbs-down-alt faded no-dec icon-large"></i>', array('title' => $quest_product->list_user_dislikes(), 'class' => 'user_product_vote')) ?>
 					<?php else: ?>
