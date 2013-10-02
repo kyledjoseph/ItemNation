@@ -5,9 +5,6 @@
 		<div class="col-12 col-sm-5 col-lg-6">
 			<h4 class="help-me">Please help me find a <span class="product-name"><?= $quest->name() ?></span></h4>
 		</div>
-		<div class="col-12 col-sm-5 col-lg-4">
-			<button id="private-public" class="hidden btn btn-primary btn-block marg-bottom quest-private"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</button>
-		</div>
 	</div>
 	<div class="row">
 		<div class="col-3 col-sm-2 col-lg-2">
@@ -33,6 +30,13 @@
 	<div class="col-12 col-sm-4 col-lg-3 col-sm-offset-1 align-center">
 		<?php if (isset($user) and $quest->belongs_to_user($user->id)): ?>
 		<div class="pushups">
+			
+			<?php if ($quest->is_public): ?>
+				<a id="private-public" class="btn btn-primary btn-block marg-bottom quest-private" href="<?= Uri::create($quest->url("access/private")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Public</a>
+			<?php else: ?>
+				<a id="private-public" class="btn btn-primary btn-block marg-bottom quest-private" href="<?= Uri::create($quest->url("access/public")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</a>
+			<?php endif; ?>
+
 			<button id="fb_share" class="marg-bottom push-center btn btn-fb btn-block push-center quest-invite"
 			data-picture="<?= $quest->default_thumb_url() ?>"
 			data-link="<?= $quest->full_url() ?>"

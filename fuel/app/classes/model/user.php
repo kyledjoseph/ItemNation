@@ -726,11 +726,21 @@ class Model_User extends \Orm\Model
 		$result = DB::select()
 			->from(Model_Quest::table())
 			->where('user_id', 'in', $this->get_friend_ids())
-			->where('is_public', '1')
+			//->where('is_public', '1')
 			->as_object('Model_Quest')
 			->execute();
 
-		return $result->as_array();
+		$friends_quests = array();
+
+		foreach ($result->as_array() as $quest)
+		{
+			if ($quest->is_public() or $quest->is_participant($this->id))
+			{
+				array_push($friends_quests, $quest);
+			}
+		}
+
+		return $friends_quests;
 	}
 
 	public function get_friends_upcoming_quests()
