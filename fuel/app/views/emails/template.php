@@ -10,7 +10,6 @@
 		Chicago, IL  60654
 	</div>
 	<div style="width: 50%;">
-		Contact us with
 		<a href="http://facebook.com/shopgab"><img src="http://shopgab.com/assets/email/facebook.png"></a>
 		<a href="http://twitter.com/weshopgab"><img src="http://shopgab.com/assets/email/twitter.png"></a>
 		<a href="http://pinterest.com/WeShopGab/boards/"><img src="http://shopgab.com/assets/email/pinterest.png"></a>
