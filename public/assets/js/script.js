@@ -54,7 +54,7 @@ mixpanel.track_forms(".mx-chat-form", "Chat");
 mixpanel.track_forms(".mx-comment-form", "Comment");
 
 
-$(".mx-rate").click(function() {
+$(".user_product_vote").click(function() {
     event.preventDefault();
     newURL = $(this).attr('href');
     mixpanel.track("Rate", null, function() {
