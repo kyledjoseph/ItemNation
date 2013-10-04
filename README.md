@@ -56,7 +56,7 @@ Our development cycle is a hybrid between [GitHub flow](http://scottchacon.com/2
 Milestones dictate the release of issue resolutions, and can fall into one of three categories:
 
 * **[Urgent:](https://github.com/kyledjoseph/itemnation/issues?milestone=20)** Release an issue resolution as soon as possible.
-* **[Weekly:](https://github.com/kyledjoseph/shopgab/issues/milestones)** Create a pull request by Tuesday to release an issue resolution on Wednesday.
+* **[Weekly:](https://github.com/kyledjoseph/shopgab/issues/milestones)** Create a pull request by Tuesday a release on Wednesday.
 * **[Wishlist:](https://github.com/kyledjoseph/shopgab/issues?milestone=9&state=open)** Wait until these issues are assigned a weekly or urgent milestone.
 
 #### 2. Issue

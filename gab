@@ -10,16 +10,15 @@ if [ "$1" == "branch" ]; then
 	git checkout master
 	git pull origin master
 	if [ "$exists_locally" == "0" ]; then
-		git checkout -b $2
-	else
 		git checkout $2
+	else
+		git checkout -b $2
 	fi
 	if [ "$exists_remotely" == "0" ]; then
 		git pull origin $2
 	else
 		git push -u origin $2
 	fi
-	echo "Checkout "$2
 elif [ "$1" == "test" ]; then
 	git push origin $branch_name
 	git checkout test
@@ -27,7 +26,6 @@ elif [ "$1" == "test" ]; then
 	git push origin test
 	git push test test
 	git checkout $branch_name
-	echo "Deployed to test server"
 elif [ "$1" == "update" ]; then
 	git checkout master
 	git pull origin master
@@ -35,10 +33,8 @@ elif [ "$1" == "update" ]; then
 	git pull origin $branch_name
 	git merge master
 	git push origin $branch_name
-	echo "Updated "$branch_name
 elif [ "$1" == "pull-request" ]; then
 	hub pull-request -i $branch_name -b kyledjoseph:master -h kyledjoseph:$branch_name
-	echo "Created pull-request at https://github.com/kyledjoseph/shopgab/pull/"$branch_name
 elif [ "$1" == "deploy" ]; then
 	git checkout master
 	git pull origin master
@@ -48,14 +44,12 @@ elif [ "$1" == "deploy" ]; then
 	git merge master
 	git push origin test
 	git push test test
-	echo "Deployed to test and live servers"
 elif [ "$1" == "commit" ]; then
 	git add -A
 	git commit -q
 	git pull origin $branch_name
 	git push origin $branch_name
 	git checkout $branch_name
-	echo "Added changes, committed, and pushed"
 else
 	echo "Available commands"
 	echo "------------------"
