@@ -4,7 +4,7 @@ branch_name="$(git symbolic-ref HEAD 2>/dev/null)" ||
 branch_name="(unnamed branch)"     # detached HEAD
 branch_name=${branch_name##refs/heads/}
 
-if [ "$@1" == "branch" ]; then
+if [ "$1" == "branch" ]; then
 	exists_locally=$(git show-ref --verify --quiet refs/heads/$2; echo $?)
 	exists_remotely=$(git ls-remote origin --quiet $2; echo $?)
 	git checkout master
