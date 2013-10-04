@@ -15,9 +15,9 @@ if [ "$1" == "branch" ]; then
 		git checkout -b $2
 	fi
 	if [ "$exists_remotely" == "0" ]; then
-		git pull origin $2
-	else
 		git push -u origin $2
+	else
+		git pull origin $2
 	fi
 elif [ "$1" == "test" ]; then
 	git push origin $branch_name
