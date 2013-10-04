@@ -44,9 +44,10 @@ elif [ "$1" == "deploy" ]; then
 	git merge master
 	git push origin test
 	git push test test
+	git checkout $branch_name
 elif [ "$1" == "commit" ]; then
 	git add -A
-	git commit -q
+	git commit
 	git pull origin $branch_name
 	git push origin $branch_name
 	git checkout $branch_name
