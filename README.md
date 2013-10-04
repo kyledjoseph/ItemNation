@@ -56,7 +56,7 @@ Our development cycle is a hybrid between [GitHub flow](http://scottchacon.com/2
 Milestones dictate the release of issue resolutions, and can fall into one of three categories:
 
 * **[Urgent:](https://github.com/kyledjoseph/itemnation/issues?milestone=20)** Release an issue resolution as soon as possible.
-* **[Weekly:](https://github.com/kyledjoseph/shopgab/issues/milestones)** Create a pull request to release an issue resolution on Wednesday.
+* **[Weekly:](https://github.com/kyledjoseph/shopgab/issues/milestones)** Create a pull request by Tuesday to release an issue resolution on Wednesday.
 * **[Wishlist:](https://github.com/kyledjoseph/shopgab/issues?milestone=9&state=open)** Wait until these issues are assigned a weekly or urgent milestone.
 
 #### 2. Issue
@@ -77,48 +77,37 @@ Always have an issue for what you're working on. Issue titles should be actionab
 Always have an branch for the issue you're working on. For example, to work on issue #12345 you'd use the following:
 
 ```
-git checkout master
-git checkout -b 12345
-git push -u origin 12345
+./gab branch 12345
 ```
 
 #### 4. Commit
 
-Commit to your branch and push.
+Add your changes, commit, and push.
 
 ```
-git commit -m "Delete everything we've ever worked on"
-git push
+./gab commit
 ```
 
-#### 5. Merge into `test`
+#### 5. Test
 
-When you're ready to test your code, merge your branch into `test` and push.
+[Test your changes](http://test.shopgab.com/).
 
 ```
-git checkout test
-git merge 12345
-git push
-git push test test
+./gab test
 ```
 
 #### 6. Pull request
 
-Create a pull request from your branch into `master`.
+Request that your branch be merged into `master`.
 
 ```
-hub pull-request -i 12345 -b kyledjoseph:master -h kyledjoseph:12345
+./gab pull-request
 ```
 
-If your pull request can't be merged automatically, update you branch with changes from `master`.
+If your pull request can't be merged automatically, merge `master` into your branch.
 
 ```
-git checkout master
-git pull
-git checkout 12345
-git pull 12345
-git merge master
-git push origin 12345
+./gab update
 ```
 
-If you're solving an [urgent](https://github.com/kyledjoseph/itemnation/issues?milestone=20) issue, you can merge this immediately and deploy. Otherwise, the pull request will be merged at the weekly meeting.
+If you're solving an [urgent](https://github.com/kyledjoseph/itemnation/issues?milestone=20) issue, you can merge this immediately and deploy with `./gab deploy`. Otherwise, the pull request will be merged at the weekly meeting.
