@@ -63,6 +63,11 @@ $(".user_product_vote").click(function() {
     });
 });
 
+$('.landing-sign-up').click(function() {
+     mixpanel.track("Sign Up");
+      mixpanel.track("Sign up (Landing)");
+})
+
 
 // ********************************************
 
