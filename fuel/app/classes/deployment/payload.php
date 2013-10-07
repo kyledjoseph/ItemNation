@@ -18,6 +18,26 @@ class Deployment_Payload extends \Orm\Model
 	);
 
 
+	protected $_response = null;
+
+	public function set_data($data)
+	{
+		$this->_response = json_decode($data);
+		$this->data = $data;
+	}
+
+	public function branch()
+	{
+		//return $this->_response->ref;
+		return $this->ref_segment(3);
+	}
+
+	public function ref_segment($number)
+	{
+		return explode('/', $this->_response->ref)[$number - 1];
+		//$parts = explode('/', $this->_data->ref);
+		//return isset($parts[$number]) ? $parts[$number] : false;
+	}
 
 	public function request_ip()
 	{
@@ -29,5 +49,11 @@ class Deployment_Payload extends \Orm\Model
 		// https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist
 		$valid_github_ips = array('204.232.175.64', '204.232.175.27', '192.30.252.0', '192.30.252.22');
 		return in_array($this->request_ip(), $valid_github_ips);
+	}
+
+	public function log()
+	{
+		$this->ip = $this->request_ip();
+		return $this->save();
 	}
 }

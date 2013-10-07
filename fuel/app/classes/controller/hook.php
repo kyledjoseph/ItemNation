@@ -13,12 +13,13 @@ class Controller_Hook extends Controller_App
 		}
 
 
-		$payload->data = html_entity_decode($payload_data);
-		$payload->ip   = $payload->request_ip();
-		$payload->save();
+
+		$payload->set_data(html_entity_decode($payload_data));
+		$payload->log();
 
 		// deploy to test and master
-
+		throw new Exception("Error Processing Request: ref: {$payload->branch()}", 1);
+		
 
 		return true;
 	}
