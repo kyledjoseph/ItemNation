@@ -175,25 +175,16 @@ class Model_Quest_Product extends \Orm\Model
 		return $vote and $this->cache_votes();
 	}
 
-	public function like_url()
-	{
-		return $this->quest->url() . '/like/' . $this->id;
-	}
 
-	public function dislike_url()
+	public function url($action)
 	{
-		return $this->quest->url() . '/dislike/' . $this->id;
+		return $this->quest->url() . '/'. $action .'/' . $this->id;
 	}
 
 
 	/**
 	 *  quest product comments
 	 */
-	public function comment_url()
-	{
-		return $this->quest->url() . '/comment/' . $this->id;
-	}
-
 	public function total_comments()
 	{
 		return Model_Quest_Product_Comment::query()->where('quest_product_id', $this->id)->count();
