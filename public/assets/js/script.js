@@ -117,5 +117,13 @@ $(".invite-friend-btn").click(function() {
     $(".invite-friend-btn").html('Pending...');
 });
 
-
-// emergency js cookie tour resolution
+if( navigator.userAgent.match(/Android/i)
+    || navigator.userAgent.match(/webOS/i)
+    || navigator.userAgent.match(/iPhone/i)
+    || navigator.userAgent.match(/iPad/i)
+    || navigator.userAgent.match(/iPod/i)
+    || navigator.userAgent.match(/BlackBerry/i)
+    || navigator.userAgent.match(/Windows Phone/i)
+){
+    $('#fb_invite').hide()
+}
