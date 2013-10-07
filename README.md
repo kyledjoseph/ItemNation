@@ -27,7 +27,7 @@ oil r install
 
 #### 3. Import MySQL dump
 
-The latest SQL dump can be found in the _db folder in the root of the repository. I recommend using [Sequel Pro](http://www.sequelpro.com) to connect to the database.
+The latest SQL dump can be found in the _db folder in the root of the repository.
 
 #### 4. Set up Local Domain
 
