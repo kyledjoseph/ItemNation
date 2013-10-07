@@ -31,14 +31,13 @@ The latest SQL dump can be found in the _db folder in the root of the repository
 
 #### 4. Set up Local Domain
 
-Edit /private/etc/hosts (you will need to use sudo).
+Edit your hosts file at `/private/etc/hosts`.
 
     sudo nano /private/etc/hosts
-    > password:
 
-Point `127.0.0.1` to `itemnation.dev` in your hosts file.
+Point `127.0.0.1` to `shopgab.dev` in your hosts file.
 
-    127.0.0.1 itemnation.dev
+    127.0.0.1 shopgab.dev
     
 #### 5. Set up remotes
 
@@ -53,11 +52,11 @@ Our development cycle is a hybrid between [GitHub flow](http://scottchacon.com/2
 
 #### 1. Milestone
 
-Milestones dictate the release of issue resolutions, and can fall into one of three categories:
+There are three types of milestones:
 
-* **[Urgent:](https://github.com/kyledjoseph/itemnation/issues?milestone=20)** Release an issue resolution as soon as possible.
-* **[Weekly:](https://github.com/kyledjoseph/shopgab/issues/milestones)** Create a pull request by Tuesday a release on Wednesday.
-* **[Wishlist:](https://github.com/kyledjoseph/shopgab/issues?milestone=9&state=open)** Wait until these issues are assigned a weekly or urgent milestone.
+* **[QA:](https://github.com/kyledjoseph/shopgab/issues?milestone=23&state=open)** Completed issues to be reviewed and tested before deployment.
+* **[Weekly:](https://github.com/kyledjoseph/shopgab/issues/milestones)** In-progress issues to be assigned to QA by 
+* **[Wishlist:](https://github.com/kyledjoseph/shopgab/issues?milestone=9&state=open)** Issues that may be assigned in the future.
 
 #### 2. Issue
 
@@ -82,7 +81,7 @@ bin/gab branch 12345
 
 #### 4. Commit
 
-Add your changes, commit, and push.
+Add your changes, commit, push, and open a pull request. 
 
 ```
 bin/gab commit
@@ -90,24 +89,16 @@ bin/gab commit
 
 #### 5. Test
 
-[Test your changes](http://test.shopgab.com/).
+[Test your changes locally](http://shopgab.dev), then [test your changes](http://test.shopgab.com/) remotely.
 
 ```
 bin/gab test
 ```
 
-#### 6. Pull request
+#### 6. Update
 
-Request that your branch be merged into `master`.
-
-```
-bin/gab pull-request
-```
-
-If your pull request can't be merged automatically, merge `master` into your branch.
+If your pull request can't be merged automatically, update your branch and solve any merge conflicts.
 
 ```
 bin/gab update
 ```
-
-If you're solving an [urgent](https://github.com/kyledjoseph/itemnation/issues?milestone=20) issue, you can merge this immediately and deploy with `bin/gab deploy`. Otherwise, the pull request will be merged at the weekly meeting.

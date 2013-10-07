@@ -33,8 +33,6 @@ elif [ "$1" == "update" ]; then
 	git pull origin $branch_name
 	git merge master
 	git push origin $branch_name
-elif [ "$1" == "pull-request" ]; then
-	hub pull-request -i $branch_name -b kyledjoseph:master -h kyledjoseph:$branch_name
 elif [ "$1" == "deploy" ]; then
 	git checkout master
 	git pull origin master
@@ -51,6 +49,11 @@ elif [ "$1" == "commit" ]; then
 	git pull origin $branch_name
 	git push origin $branch_name
 	git checkout $branch_name
+	repo_path=$(git rev-parse --show-toplevel)
+	if [ ! -f $repo_path'/.pull-request' ]; then
+		touch $repo_path'/.pull-request'
+		hub pull-request -i $branch_name -b kyledjoseph:master -h kyledjoseph:$branch_name
+	fi
 else
 	echo "Available commands"
 	echo "------------------"
