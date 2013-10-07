@@ -413,6 +413,32 @@ class Controller_Quests extends Controller_App
 
 
 	/**
+	 *
+	 */
+	public function get_close($quest_url, $quest_product_id)
+	{
+		$quest = $this->get_quest_by_url($quest_url);
+
+		$this->require_auth($quest->url());
+
+		if ($quest->user_id !== $this->user->id)
+		{
+			$this->redirect($quest->url());
+		}
+
+
+		$quest_product = $quest->get_quest_product($quest_product_id);
+		isset($quest_product) or $this->redirect($quest->url(), 'info', 'Invalid product');
+
+
+		$quest->purchased_product($quest_product);
+		$quest->close();
+
+		$this->redirect('/', 'success', 'Thanks!');
+	}
+
+
+	/**
 	 * 
 	 */
 	public function get_remove($quest_url, $quest_product_id)
