@@ -58,7 +58,11 @@
 			data-name="Help me find a <?= $quest->name ?>"
 			data-caption="ShopGab - Shop Socially!"
 			data-description="<?= $user->display_name() ?> is trying to find a <?= $quest->name ?> through ShopGab and has requested your input! Please click on the link below to see their page and join in the search. Thanks!"><i class="icon-facebook icon-large"></i>&nbsp;&nbsp;&nbsp;Post to timeline</button>
-			<button id="fb_invite" class="btn btn-primary btn-fb btn-block push-center quest-message" href="" data-link="<?= $quest->full_url() ?>"><i class="icon-facebook icon-large"></i>&nbsp;&nbsp;&nbsp;Message friends</button>							
+			<?php if (Fuel::$env == 'production'): ?>
+				<button id="fb_invite" class="btn btn-primary btn-fb btn-block push-center quest-message" href="" data-link="<?= $quest->full_url() ?>"><i class="icon-facebook icon-large"></i>&nbsp;&nbsp;&nbsp;Message friends</button>
+			<?php else: ?>
+				<button id="fb_invite" class="btn btn-primary btn-fb btn-block push-center quest-message" href="" data-link="http://test.shopgab.com/<?= Uri::string(); ?>"><i class="icon-facebook icon-large"></i>&nbsp;&nbsp;&nbsp;Message friends</button>
+			<?php endif; ?>
 		</div>
 	<?php endif; ?>
 </div>
