@@ -180,7 +180,7 @@ class Model_Quest extends \Orm\Model
 			}
 		}
 
-		return "http://placehold.it/{$width}x{$height}/fff";
+		return "assets/img/no-product.png";
 	}
 
 
