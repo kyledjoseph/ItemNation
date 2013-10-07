@@ -77,7 +77,7 @@ Always have an issue for what you're working on. Issue titles should be actionab
 Always have an branch for the issue you're working on. For example, to work on issue #12345 you'd use the following:
 
 ```
-./gab branch 12345
+bin/gab branch 12345
 ```
 
 #### 4. Commit
@@ -85,7 +85,7 @@ Always have an branch for the issue you're working on. For example, to work on i
 Add your changes, commit, and push.
 
 ```
-./gab commit
+bin/gab commit
 ```
 
 #### 5. Test
@@ -93,7 +93,7 @@ Add your changes, commit, and push.
 [Test your changes](http://test.shopgab.com/).
 
 ```
-./gab test
+bin/gab test
 ```
 
 #### 6. Pull request
@@ -101,13 +101,13 @@ Add your changes, commit, and push.
 Request that your branch be merged into `master`.
 
 ```
-./gab pull-request
+bin/gab pull-request
 ```
 
 If your pull request can't be merged automatically, merge `master` into your branch.
 
 ```
-./gab update
+bin/gab update
 ```
 
-If you're solving an [urgent](https://github.com/kyledjoseph/itemnation/issues?milestone=20) issue, you can merge this immediately and deploy with `./gab deploy`. Otherwise, the pull request will be merged at the weekly meeting.
+If you're solving an [urgent](https://github.com/kyledjoseph/itemnation/issues?milestone=20) issue, you can merge this immediately and deploy with `bin/gab deploy`. Otherwise, the pull request will be merged at the weekly meeting.
