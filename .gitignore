@@ -12,9 +12,11 @@ fuel/app/cache/*/*
 build
 nbproject/
 .idea
+.pr/*
 
 /fuel/app/config/crypt.php
 /fuel/app/vendor/.composer/
 /fuel/app/vendor/
 /fuel/app/config/development/migrations.php
 /public/assets/img/products/
+
