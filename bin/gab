@@ -19,6 +19,7 @@ if [ "$1" == "branch" ]; then
 	else
 		git pull origin $2
 	fi
+	git merge master
 elif [ "$1" == "test" ]; then
 	git push origin $branch_name
 	git checkout test
@@ -50,8 +51,8 @@ elif [ "$1" == "commit" ]; then
 	git push origin $branch_name
 	git checkout $branch_name
 	repo_path=$(git rev-parse --show-toplevel)
-	if [ ! -f $repo_path'/.pull-request' ]; then
-		touch $repo_path'/.pull-request'
+	if [ ! -f $repo_path'/.pull-request-'$branch_name ]; then
+		touch $repo_path'/.pull-request-'$branch_name
 		hub pull-request -i $branch_name -b kyledjoseph:master -h kyledjoseph:$branch_name
 	fi
 else
