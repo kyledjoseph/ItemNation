@@ -12,7 +12,7 @@ fuel/app/cache/*/*
 build
 nbproject/
 .idea
-.pull-request
+.pr/*
 
 /fuel/app/config/crypt.php
 /fuel/app/vendor/.composer/

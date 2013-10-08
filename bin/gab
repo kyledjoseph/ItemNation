@@ -51,8 +51,11 @@ elif [ "$1" == "commit" ]; then
 	git push origin $branch_name
 	git checkout $branch_name
 	repo_path=$(git rev-parse --show-toplevel)
-	if [ ! -f $repo_path'/.pull-request-'$branch_name ]; then
-		touch $repo_path'/.pull-request-'$branch_name
+	if [ ! -d ".pr" ]; then
+		mkdir '.pr'
+	fi
+	if [ ! -f $repo_path'.pr/'$branch_name ]; then
+		touch $repo_path'/.pr/'$branch_name
 		hub pull-request -i $branch_name -b kyledjoseph:master -h kyledjoseph:$branch_name
 	fi
 else
