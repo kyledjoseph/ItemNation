@@ -11,7 +11,7 @@ class Controller_Quests extends Controller_App
 
 
 	/**
-	 * 
+	 *
 	 */
 	private function get_quest_by_url($quest_url)
 	{
@@ -25,7 +25,7 @@ class Controller_Quests extends Controller_App
 		return $quest;
 	}
 
-	
+
 	/**
 	 * Show all quests of the current user
 	 */
@@ -67,7 +67,7 @@ class Controller_Quests extends Controller_App
 			{
 				$this->redirect($quest->url());
 			}
-		
+
 			$quest->set_active_sort($sort);
 		}
 
@@ -133,7 +133,7 @@ class Controller_Quests extends Controller_App
 		}
 
 		$quest_product->add_comment($quest_product->id, $this->user->id, $post->comment);
-		
+
 		$this->redirect($quest->url());
 	}
 
@@ -205,7 +205,7 @@ class Controller_Quests extends Controller_App
 
 
 	/**
-	 * 
+	 *
 	 */
 	public function post_create()
 	{
@@ -213,7 +213,7 @@ class Controller_Quests extends Controller_App
 
 		$quest = $this->user->create_quest($post->name, $post->description, $post->purchase_within);
 		$this->user->mark_notice_seen('start_quest');
-		
+
 		$this->redirect($quest->url());
 	}
 
@@ -224,7 +224,7 @@ class Controller_Quests extends Controller_App
 	public function get_edit($quest_url)
 	{
 		$quest = $this->get_quest_by_url($quest_url);
-		
+
 		$this->require_auth($quest->url());
 
 		if ($quest->user_id !== $this->user->id)
@@ -304,7 +304,7 @@ class Controller_Quests extends Controller_App
 	// 			}
 	// 		}
 	// 	}
-		
+
 	// 	// handled client side
 	// 	// if (! empty($post->fb_friends))
 	// 	// {
@@ -340,7 +340,7 @@ class Controller_Quests extends Controller_App
 		{
 			$this->redirect($quest->url(), 'error', "Enter one or more recipients to invite to this Quest");
 		}
-		
+
 		foreach ($recipients as $recipient)
 		{
 			// is valid email
@@ -359,10 +359,10 @@ class Controller_Quests extends Controller_App
 		{
 			$this->redirect($quest->url(), 'info', "Invitation sent");
 		}
-		
+
 	}
 
-	
+
 	/**
 	 * Change public/private setting
 	 */
@@ -413,7 +413,7 @@ class Controller_Quests extends Controller_App
 
 
 	/**
-	 * 
+	 *
 	 */
 	public function get_remove($quest_url, $quest_product_id)
 	{
@@ -422,7 +422,7 @@ class Controller_Quests extends Controller_App
 
 		$this->require_auth($quest->url());
 
-		if (! $quest->belongs_to_user($this->user->id))
+		if (! $quest->belongs_to_user($this->user))
 		{
 			$this->redirect($quest->url());
 		}

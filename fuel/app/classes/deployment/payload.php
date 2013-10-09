@@ -28,15 +28,17 @@ class Deployment_Payload extends \Orm\Model
 
 	public function branch()
 	{
-		//return $this->_response->ref;
 		return $this->ref_segment(3);
 	}
 
 	public function ref_segment($number)
 	{
-		return explode('/', $this->_response->ref)[$number - 1];
-		//$parts = explode('/', $this->_data->ref);
-		//return isset($parts[$number]) ? $parts[$number] : false;
+		return $this->ref_segments()[$number - 1];
+	}
+
+	public function ref_segments()
+	{
+		return explode('/', $this->_response->ref);
 	}
 
 	public function request_ip()

@@ -13,12 +13,12 @@
 		<div class="col-9 col-sm-5 col-lg-6">
 			<div class="bubble">
 				<p><?= $quest->description() ?></p>
-				<?php if (isset($user) and $quest->belongs_to_user($user->id)): ?>
+				<?php if (isset($user) and $quest->belongs_to_user($user)): ?>
 				<script type="text/javascript">
 				var self_quest = true;
 				</script>
 				<?= Html::anchor('#questModal', 'Edit Quest', array('class' => '', 'data-toggle' => 'modal')) ?> |
-				<?= Html::anchor('#deleteQuestModal', 'Delete Quest', array('class' => '', 'data-toggle' => 'modal')) ?> 
+				<?= Html::anchor('#deleteQuestModal', 'Delete Quest', array('class' => '', 'data-toggle' => 'modal')) ?>
 			<?php endif; ?>
 		</div>
 		<div class="purchase-within">
@@ -31,9 +31,9 @@
 	</div>
 
 	<div class="col-12 col-sm-4 col-lg-3 col-sm-offset-1 align-center">
-		<?php if (isset($user) and $quest->belongs_to_user($user->id)): ?>
+		<?php if (isset($user) and $quest->belongs_to_user($user, false)): ?>
 		<div class="pushups">
-			
+
 		<div class="btn-group marg-bottom full-width public-private-radios" data-toggle="buttons">
 			<?php if ($quest->is_public): ?>
 				<label class="btn btn-primary active" style="width:50%">
@@ -102,7 +102,7 @@
 						</span>
 					</div>
 				</a>
-				<?php if (isset($user) and $quest->belongs_to_user($user->id)): ?>
+				<?php if (isset($user) and $quest->belongs_to_user($user)): ?>
 				<a class="close quest-page" href="<?= $quest_product->remove_url() ?>">&times;</a>
 			<?php endif; ?>
 			<div class="row product-info">
@@ -113,14 +113,14 @@
 						<a class="no-dec" href="#registerModal" data-toggle="modal"><span class="badge"><?= $quest_product->total_comments() ?></span> <i class="icon-comments-alt faded icon-large"></i><a>
 					<?php endif; ?>
 
-					
+
 					</div>
 					<div class="pull-right fix-pull-right">
 						<?php if (isset($user)): ?>
-						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->like_url(), '<i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp; 
+						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->like_url(), '<i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp;
 						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <?= Html::anchor($quest_product->dislike_url(), '<i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_dislikes(), 'class' => 'user_product_vote')) ?>
 					<?php else: ?>
-					<span class="badge"><?= $quest_product->total_likes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i></a> &nbsp; 
+					<span class="badge"><?= $quest_product->total_likes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i></a> &nbsp;
 					<span class="badge"><?= $quest_product->total_dislikes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i></a>
 				<?php endif; ?>
 			</div>

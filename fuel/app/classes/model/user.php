@@ -301,7 +301,7 @@ class Model_User extends \Orm\Model
 		{
 			$avatar = $this->get_avatar($width, $height);
 		}
-		
+
 		return isset($avatar) ? $avatar->public_uri : $this->default_avatar_uri($width, $height);
 	}
 
@@ -429,7 +429,7 @@ class Model_User extends \Orm\Model
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public function get_public_quests()
 	{
@@ -453,7 +453,7 @@ class Model_User extends \Orm\Model
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public function select_quest()
 	{
@@ -466,13 +466,13 @@ class Model_User extends \Orm\Model
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public function remove_quest($quest_id)
 	{
 		$quest = Model_Quest::get_by_id($quest_id);
 
-		if (! $quest->belongs_to_user($this->id))
+		if (! $quest->belongs_to_user($this))
 		{
 			return false;
 		}
@@ -630,21 +630,21 @@ class Model_User extends \Orm\Model
 		// return $adapter->getUserContacts();
 
 		try
-		{ 
-			$response = $adapter->api()->api('/me/friends?limit=0'); 
+		{
+			$response = $adapter->api()->api('/me/friends?limit=0');
 		}
 		catch (FacebookApiException $e)
 		{
 			throw new Exception( "User contacts request failed! {$this->providerId} returned an error: $e" );
-		} 
- 
+		}
+
 		if (! $response || ! count( $response["data"]))
 		{
 			return array();
 		}
 
 		$contacts = array();
- 
+
 		foreach ($response["data"] as $info)
 		{
 			$contacts[] = new Model_Facebook_Friend($info);
@@ -664,9 +664,9 @@ class Model_User extends \Orm\Model
 		// return $adapter->getUserContacts();
 
 		try
-		{ 
+		{
 			$query = urlencode("SELECT uid, name FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = {$fb_uid}) AND is_app_user = 1");
-			$response = $adapter->api()->api('fql?q='.$query); 
+			$response = $adapter->api()->api('fql?q='.$query);
 		}
 		catch (FacebookApiException $e)
 		{
@@ -679,7 +679,7 @@ class Model_User extends \Orm\Model
 		}
 
 		$contacts = array();
- 
+
 		foreach ($response["data"] as $info)
 		{
 			$contacts[] = new Model_Facebook_Friend($info);
@@ -722,7 +722,7 @@ class Model_User extends \Orm\Model
 	public function get_friends_quests()
 	{
 		if (! $this->has_friends()) return array();
-		
+
 		$result = DB::select()
 			->from(Model_Quest::table())
 			->where('user_id', 'in', $this->get_friend_ids())
@@ -780,7 +780,7 @@ class Model_User extends \Orm\Model
 	public function authenticate_with($user_info)
 	{
 		$user_auth = Model_User_Auth::create_user_auth($this, $user_info);
-		
+
 		if ($user_info['provider'] == 'facebook')
 		{
 			$this->avatar_type = 2;
@@ -878,7 +878,7 @@ class Model_User extends \Orm\Model
 
 
 	/**
-	 * 
+	 *
 	 */
 	public static function create_user($email, $password, $display_name = null)
 	{
