@@ -22,8 +22,10 @@ if [ "$1" == "branch" ]; then
 	git merge master
 	git push origin $2
 elif [ "$1" == "test" ]; then
+	git pull origin $branch_name
 	git push origin $branch_name
 	git checkout test
+	git pull origin test
 	git merge $branch_name
 	git push origin test
 	git push test test
@@ -40,6 +42,7 @@ elif [ "$1" == "deploy" ]; then
 	git pull origin master
 	git push deploy master
 	git checkout test
+	git pull origin test
 	git pull origin master
 	git merge master
 	git push origin test

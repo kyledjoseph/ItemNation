@@ -18,8 +18,15 @@ class Controller_Hook extends Controller_App
 		$payload->log();
 
 		// deploy to test and master
-		throw new Exception("Error Processing Request: ref: {$payload->branch()}", 1);
-		
+		if ($payload->branch() == 'master')
+		{
+
+		}
+
+		if ($payload->branch() == 'test')
+		{
+			
+		}
 
 		return true;
 	}

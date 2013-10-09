@@ -88,11 +88,11 @@ class Model_Quest extends \Orm\Model
 		return '/quest/' . $this->url . (! empty($page) ? '/' . $page : null);
 	}
 
-	public function belongs_to_user($user_id)
+	public function belongs_to_user($user, $allow_admin = true)
 	{
-		return $user_id == $this->user_id;
+		return $user->id == $this->user_id or ($allow_admin and $user->is_admin());
 	}
-	
+
 	public function date($format = "r")
 	{
 		return date($format, $this->created_at);
@@ -226,7 +226,7 @@ class Model_Quest extends \Orm\Model
 
 
 	/**
-	 * 
+	 *
 	 */
 	public function sort_options()
 	{
@@ -261,7 +261,7 @@ class Model_Quest extends \Orm\Model
 
 
 	/**
-	 * 
+	 *
 	 */
 	public function get_quest_products()
 	{
@@ -271,7 +271,7 @@ class Model_Quest extends \Orm\Model
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public function get_quest_products_sorted()
 	{
@@ -302,7 +302,7 @@ class Model_Quest extends \Orm\Model
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public function get_quest_product($quest_product_id)
 	{
@@ -313,7 +313,7 @@ class Model_Quest extends \Orm\Model
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public function add_product($product_id, $added_by = 0)
 	{
@@ -332,10 +332,10 @@ class Model_Quest extends \Orm\Model
 		return $quest_product->save() ? $quest_product : null;
 	}
 
-	
+
 
 	/**
-	 * 
+	 *
 	 */
 	public function new_message($user_id, $message)
 	{
