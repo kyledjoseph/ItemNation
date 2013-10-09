@@ -2,6 +2,11 @@
 
 class Controller_Hook extends Controller_App
 {
+	// public function after($response)
+	// {
+	// 	return $response;
+	// }
+
 	public function post_deploy()
 	{
 		$payload = new Deployment_Payload;
@@ -17,13 +22,24 @@ class Controller_Hook extends Controller_App
 		$payload->set_data(html_entity_decode($payload_data));
 		$payload->log();
 
-		// deploy to test and master
-		if ($payload->branch() == 'master')
-		{
+		
 
+		
+		if ($payload->branch() == 'test')
+		{
+			$repo = new PHPGit_Repository('/var/www/shopgab');
+
+			if (! $repo->hasBranch('master'))
+			{
+				throw new Exception("");
+			}
+
+			$repo->git('pull origin master');
 		}
 
-		if ($payload->branch() == 'test')
+
+
+		if ($payload->branch() == 'master')
 		{
 			
 		}
