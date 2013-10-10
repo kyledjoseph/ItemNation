@@ -144,25 +144,6 @@ $(function(){
                 alert('Not logged in');
             }
         }, { scope : 'publish_stream' });
-        /*
-        FB.api('/me/permissions', function (response) {
-        var perms = response.data[0];
-        // Check for publish_stream permission in this case....
-        if (perms.publish_stream) {
-        // User has permission
-        FB.ui({
-        method: 'feed',
-        link: $(this).attr('data-link'),
-        picture: $(this).attr('data-picture'), //'http://fbrell.com/f8.jpg',
-        name: $(this).attr('data-name'),
-        caption: $(this).attr('data-caption'),
-        description: $(this).attr('data-description')
-        }, function(response) {})
-        } else {
-        // User DOESN'T have permission. Perhaps ask for them again with FB.login?
-        }
-        } );
-        */
 
         return false;
     });
