@@ -6,7 +6,7 @@
           <h4 class="modal-title">New Quest</h4>
         </div>
 			<div class="modal-body">
-				<?= Form::open(array('action' => 'quest/create', 'method' => 'POST', 'class' => 'form-vertical push-center')) ?>
+				<?= Form::open(array('action' => 'quest/create', 'method' => 'POST', 'class' => 'form-vertical push-center', 'ajax-action'=>'prepend', 'ajax-target'=>'quest-wrapper', 'ajax-modal'=>'questModal')) ?>
 				<div class="form-group">
 					<label for="name">What are you shopping for?</label>
 						<input name="name" class="form-control" type="text" id="inputWhat" placeholder="Stroller">

@@ -16,7 +16,7 @@ class Controller_Friends extends Controller_App
 
 		$this->add_modal(View::forge('user/modal/start_quest'));
 		$this->add_modal(View::forge('friends/modal/invite'));
-		
+
 		$this->template->body = View::forge('friends/index', array(
 			'friends_quests' => $this->user->get_friends_quests(),
 		));
@@ -38,7 +38,7 @@ class Controller_Friends extends Controller_App
 		$this->template->body = View::forge('friends/view', array(
 			'friendship'   => $friendship,
 			'quests'       => $quests,
-			'total_quests' => count($quests),   
+			'total_quests' => count($quests),
 		));
 	}
 
@@ -78,7 +78,7 @@ class Controller_Friends extends Controller_App
 
 		$friendship->hide();
 
-		$this->redirect('friends', 'info', 'Friend removed');
+		$this->redirect('friends', 'success', 'Friend removed');
 	}
 
 
@@ -89,7 +89,7 @@ class Controller_Friends extends Controller_App
 	{
 		$total_added = $this->user->add_registered_facebook_friends();
 
-		$this->redirect('friends', 'info', "$total_added friends have been added");
+		$this->redirect('friends', 'success', "$total_added friends have been added");
 	}
 
 }

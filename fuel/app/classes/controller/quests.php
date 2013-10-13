@@ -19,7 +19,7 @@ class Controller_Quests extends Controller_App
 
 		if (! isset($quest))
 		{
-			$this->redirect('/');
+			$this->redirect('/', 'error', 'Opps, an error occurs');
 		}
 
 		return $quest;
@@ -65,7 +65,7 @@ class Controller_Quests extends Controller_App
 		{
 			if (! $quest->is_sort_type($sort))
 			{
-				$this->redirect($quest->url());
+                                $this->redirect($quest->url(), 'error', 'Opps, an error occurs');
 			}
 
 			$quest->set_active_sort($sort);
@@ -90,7 +90,8 @@ class Controller_Quests extends Controller_App
 			$this->add_modal(View::forge('quests/modal/delete_quest', array('quest' => $quest)));
 		}
 
-		$this->template->body = View::forge('quests/view', array(
+		$this->template->body =  View::forge('quests/view', array(
+                        'details'         => View::forge('quests/templates/details', array('quest' => $quest)),
 			'quest'           => $quest,
 			'quest_products'  => $quest_products,
 			'total_products'  => count($quest_products),
@@ -110,8 +111,8 @@ class Controller_Quests extends Controller_App
 
 		$this->require_auth($quest->url());
 
-		$quest->new_message($this->user->id, $post->message);
-		$this->redirect($quest->url());
+		$message = $quest->new_message($this->user->id, $post->message);
+		$this->redirect($quest->url(), 'success', 'your message has been posted', View::forge('quests/templates/message', array('message' => $message)) );
 	}
 
 
@@ -129,12 +130,12 @@ class Controller_Quests extends Controller_App
 
 		if (! isset($quest_product))
 		{
-			$this->redirect($quest->url());
+			$this->redirect($quest->url(), 'error', 'Opps, an error occurs');
 		}
 
 		$quest_product->add_comment($quest_product->id, $this->user->id, $post->comment);
 
-		$this->redirect($quest->url());
+		$this->redirect($quest->url(), 'success', 'Your comment has been added.');
 	}
 
 
@@ -148,7 +149,7 @@ class Controller_Quests extends Controller_App
 		$this->require_auth($quest->url());
 
 		$quest_product = $quest->get_quest_product($quest_product_id);
-		isset($quest_product) or $this->redirect($quest->url(), 'info', 'Invalid product');
+		isset($quest_product) or $this->redirect($quest->url(), 'error', 'Invalid product');
 
 		// has the user already voted?
 		if ($quest_product->has_user_voted($this->user->id))
@@ -166,7 +167,7 @@ class Controller_Quests extends Controller_App
 			$quest_product->like($this->user->id);
 		}
 
-		$this->redirect($quest->url());
+                $this->redirect($quest->url(), 'success', 'You have successfully like this product');
 	}
 
 
@@ -198,7 +199,7 @@ class Controller_Quests extends Controller_App
 			$quest_product->dislike($this->user->id);
 		}
 
-		$this->redirect($quest->url());
+		$this->redirect($quest->url(), 'success', 'Product disliked');
 	}
 
 
@@ -214,7 +215,7 @@ class Controller_Quests extends Controller_App
 		$quest = $this->user->create_quest($post->name, $post->description, $post->purchase_within);
 		$this->user->mark_notice_seen('start_quest');
 
-		$this->redirect($quest->url());
+		$this->redirect($quest->url(), 'success', 'Post created', View::forge('user/item', array('quest' => $quest)));
 	}
 
 
@@ -229,7 +230,7 @@ class Controller_Quests extends Controller_App
 
 		if ($quest->user_id !== $this->user->id)
 		{
-			$this->redirect($quest->url());
+			$this->redirect($quest->url(), 'error', 'You cannot perform this operation');
 		}
 
 		$this->template->body = View::forge('quests/edit', array(
@@ -245,7 +246,7 @@ class Controller_Quests extends Controller_App
 
 		if ($quest->user_id !== $this->user->id)
 		{
-			$this->redirect($quest->url());
+			$this->redirect($quest->url(), 'error', 'You cannot perform this operation');
 		}
 
 		$post = $this->post_data('name', 'description', 'purchase_within');
@@ -256,7 +257,7 @@ class Controller_Quests extends Controller_App
 
 		$quest->save();
 
-		$this->redirect($quest->url());
+		$this->redirect($quest->url(), 'success', 'Quest updated', View::forge('quests/templates/details', array('quest' => $quest, 'user' => $this->user)));
 	}
 
 
@@ -271,11 +272,11 @@ class Controller_Quests extends Controller_App
 
 		if ($quest->user_id !== $this->user->id)
 		{
-			$this->redirect('/');
+			$this->redirect('/', 'error', 'You cannot perform this operation');
 		}
 
 		$quest->delete();
-		$this->redirect('/');
+		$this->redirect('/', 'success', 'Quest deleted');
 	}
 
 
@@ -353,11 +354,11 @@ class Controller_Quests extends Controller_App
 
 		if (count($recipients) > 1)
 		{
-			$this->redirect($quest->url(), 'info', "Invitations sent");
+			$this->redirect($quest->url(), 'success', "Invitations sent");
 		}
 		else
 		{
-			$this->redirect($quest->url(), 'info', "Invitation sent");
+			$this->redirect($quest->url(), 'success', "Invitation sent");
 		}
 
 	}
@@ -374,18 +375,18 @@ class Controller_Quests extends Controller_App
 
 		if ($quest->user_id !== $this->user->id)
 		{
-			$this->redirect($quest->url());
+			$this->redirect($quest->url(), 'error', 'You cannot perform this operation');
 		}
 
 		if (! in_array($type, array('public', 'private')))
 		{
-			$this->redirect($quest->url());
+			$this->redirect($quest->url(), 'error', 'You cannot perform this operation');
 		}
 
 		$quest->is_public = ($type == 'public' ? 1 : 0);
 		$quest->save();
 
-		$this->redirect($quest->url());
+		$this->redirect($quest->url(), 'success', 'Access updated');
 	}
 
 
@@ -400,7 +401,7 @@ class Controller_Quests extends Controller_App
 
 		if ($quest->user_id !== $this->user->id)
 		{
-			$this->redirect($quest->url());
+			$this->redirect($quest->url(), 'error', 'You cannot perform this operation');
 		}
 
 		$post = $this->post_data('purchase_within');
@@ -408,7 +409,7 @@ class Controller_Quests extends Controller_App
 		$quest->set_purchase_within($post->purchase_within);
 		$quest->save();
 
-		$this->redirect($quest->url());
+		$this->redirect($quest->url(), 'success', 'Timeframe updated');
 	}
 
 
@@ -424,12 +425,12 @@ class Controller_Quests extends Controller_App
 
 		if (! $quest->belongs_to_user($this->user))
 		{
-			$this->redirect($quest->url());
+			$this->redirect($quest->url(), 'error', 'You cannot perform this operation');
 		}
 
 		if (! isset($quest_product))
 		{
-			$this->redirect($quest->url());
+			$this->redirect($quest->url(), 'error', 'You cannot perform this operation');
 		}
 
 		$quest_product->remove();

@@ -76,7 +76,7 @@ html[xmlns] .clearfix {
 	display: none
 }
 /****
-* Images 
+* Images
 ***/
 #mychats-user .user-message:after,
 #mychats-chat .reply:after,
@@ -314,8 +314,8 @@ html[xmlns] .clearfix {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#91e54f', endColorstr='#38a13a');
 	background: -webkit-gradient(linear, left top, left bottom, from(#91e54f), to(#38a13a));
 }
-/**** 
-* Gloabl 
+/****
+* Gloabl
 ***/
 #wrap {
 	background: #fff url(../img/top-shadow.png) repeat-x; /*background-attachment: fixed; nowhitespace: afterproperty; background: -moz-linear-gradient(top, #fff, #dae8f1); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dae8f1'); background: -webkit-gradient(linear, left top, left bottom, from(#fff),  to(#dae8f1));*/ overflow: hidden; height: 100%; /* border-bottom: 1px solid #a0a0a0; box-shadow: 0 3px 10px rgba(0,0,0,.4);*/;
@@ -429,8 +429,8 @@ header nav .settings-icon {
 
 }
 
-/**** 
-* User 
+/****
+* User
 ***/
 #user {
 	position: absolute;
@@ -505,7 +505,7 @@ header nav .settings-icon {
 	color: #fff
 }
 /****
-* Content 
+* Content
 ***/
 #main {
 	position: relative;
@@ -537,8 +537,8 @@ header nav .settings-icon {
 #pagination span {
 	color: #999
 }
-/**** 
-* Search 
+/****
+* Search
 ***/
 #search {
 	float: right;
@@ -833,8 +833,8 @@ header nav .settings-icon {
 #dashboard .items li.no-mar {
 	margin-right: 0
 }
-/**** 
-* Product 
+/****
+* Product
 ***/
 #products {
 
@@ -874,8 +874,8 @@ header nav .settings-icon {
 #products li:hover span {
 	text-decoration: underline
 }
-/**** 
-*View Product 
+/****
+*View Product
 ***/
 #view-product {
 	position: relative;
@@ -1009,8 +1009,8 @@ header nav .settings-icon {
 	vertical-align: super;
 	font-size: 11px;
 }
-/**** 
-* Wishlist 
+/****
+* Wishlist
 ***/
 #wishlist,
 #view-product,
@@ -1783,7 +1783,7 @@ aside {
 	width: 100%;
 	box-sizing: border-box;
 }
-/**** 
+/****
 * Right side
 ***/
 aside {
@@ -1855,8 +1855,8 @@ aside {
 .friends-bought a.details:hover {
 	text-decoration: none
 }
-/**** 
-* Filter 
+/****
+* Filter
 ***/
 #filters-container {
 	position: absolute;
@@ -2074,7 +2074,7 @@ aside {
 	font-size: 11px;
 }
 /****
-* Main Area 
+* Main Area
 ***/
 #main-section h1 {
 	color: #004a76;
@@ -2149,7 +2149,7 @@ aside {
 	margin-left: 128px
 }
 /****
-* Footer 
+* Footer
 ***/
 footer {
 	position: relative;
@@ -2256,8 +2256,8 @@ footer .footer-bottom .footer-logo {
 /****
 * Landing Page
 ***/
-/**** 
-* Overlays and modal windows 
+/****
+* Overlays and modal windows
 ***/
 #overlay,
 .dialog {
