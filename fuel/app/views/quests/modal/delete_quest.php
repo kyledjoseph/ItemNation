@@ -8,9 +8,9 @@
 			<div class="modal-body">
 				<p>This change is permanent and can <strong>not</strong> be reversed.</p>
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer ajax-action">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<a href="<?= Uri::create($quest->url('delete')) ?>">
+				<a ajax-action="redirect" href="<?= Uri::create($quest->url('delete')) ?>">
 					<button type="button" class="btn btn-danger">Delete Quest</button>
 				</a>
 
