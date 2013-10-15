@@ -108,8 +108,9 @@ mixpanel.track("View Quest");
 if (self_quest) {
     mixpanel.track("View Quest (self)");
 }
-
+/*
 $(".public-private-radios label").click(function(event) {
     newURL = $(this).find('input').attr('href');
     window.location = newURL;
 });
+*/

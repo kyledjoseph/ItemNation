@@ -81,7 +81,7 @@ mixpanel.init("0c06e22671690f1006e02a4d071839e9");</script><!-- end Mixpanel -->
 
 
 	<!-- JavaScript plugins (requires jQuery) -->
-	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="//cdn.optimizely.com/js/303981027.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="/assets/js/script.js"></script>

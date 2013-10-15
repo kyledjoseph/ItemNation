@@ -6,13 +6,13 @@
 			<h4 class="modal-title">Edit Quest</h4>
 		</div>
 
-		<?= Form::open(array('action' => $quest->url('edit'), 'method' => 'POST', 'class' => 'form-vertical push-center')) ?>
+		<?= Form::open(array('action' => $quest->url('edit'), 'method' => 'POST', 'class' => 'form-vertical push-center', 'ajax-action' => 'update', 'ajax-target' => 'details-wrapper', 'ajax-modal'=>'questModal')) ?>
 		<div class="modal-body">
 			<div class="form-group">
 				<label for="name">What are you shopping for?</label>
 				<input name="name" class="form-control" type="text" id="inputWhat" value="<?= $quest->name ?>" />
 			</div>
-				
+
 			<div class="form-group">
 				<label class="control-label" for="description">Tell your friends more about what you're looking for.</label>
 				<textarea name="description" class="form-control" id="inputDescription" rows="6"><?= $quest->description ?></textarea>

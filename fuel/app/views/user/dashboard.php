@@ -21,15 +21,11 @@
 				<div class="row pad-top">
 					<div class="col-12"
 						<div class="row product-rows">
+                                                        <div id='quest-wrapper'>
 							<?php foreach ($quests as $quest): ?>
-								<div class="col-12 col-sm-4 col-lg-3 dash-product-square">
-									<div class="added-by">&nbsp;</div>
-									<a href="<?= Uri::create($quest->url()) ?>" class="dash-product-image-div" style="background-image:url(<?= $quest->default_thumb_url(250, 220) ?>)">
-										<div class="product-name"><?= $quest->name() ?></div>
-										<span class="close dash-close"><span class="badge"><?= $quest->total_unseen_notifications() ?></span>
-									</a>
-								</div>
+                                                        <?php echo View::forge('user/item', array('quest' => $quest))->render(); ?>
 							<?php endforeach; ?>
+                                                        </div>
 							<div class="col-12 col-sm-4 col-lg-3 dash-product-square no">
 								<div class="added-by">
 									&nbsp;
