@@ -36,18 +36,18 @@
 
 		<div class="btn-group marg-bottom full-width public-private-radios" data-toggle="buttons">
 			<?php if ($quest->is_public): ?>
-				<label class="btn btn-primary active" style="width:50%">
-					<input type="radio" id="private-public" class="" href="<?= Uri::create($quest->url("access/public")) ?>"><i class="icon-unlock icon-large"></i>&nbsp;&nbsp;&nbsp;Public</input>
+				<label class="btn btn-primary active public" title="All of your friends with ShopGab accounts can view this quest" style="width:50%">
+					<input type="radio" class="private-public" href="<?= Uri::create($quest->url("access/public")) ?>"><i class="icon-unlock icon-large"></i>&nbsp;&nbsp;&nbsp;Public</input>
 				</label>
-				<label class="btn btn-primary" style="width:50%">
-					<input type="radio" id="private-public" class="" href="<?= Uri::create($quest->url("access/private")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</input>
+				<label class="btn btn-primary private" style="width:50%" title="Only the friends you directly invite can view this quest">
+					<input type="radio" class="private-public" href="<?= Uri::create($quest->url("access/private")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</input>
 				</label>
 			<?php else: ?>
-				<label class="btn btn-primary" style="width:50%">
-					<input type="radio" id="private-public" class="" href="<?= Uri::create($quest->url("access/public")) ?>"><i class="icon-unlock icon-large"></i>&nbsp;&nbsp;&nbsp;Public</input>
+				<label class="btn btn-primary public" style="width:50%" title="All of your friends with ShopGab accounts can view this quest">
+					<input type="radio" class="private-public" href="<?= Uri::create($quest->url("access/public")) ?>"><i class="icon-unlock icon-large"></i>&nbsp;&nbsp;&nbsp;Public</input>
 				</label>
-				<label class="btn btn-primary active" style="width:50%">
-					<input type="radio" id="private-public" class="" href="<?= Uri::create($quest->url("access/private")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</input>
+				<label class="btn btn-primary active private" style="width:50%" title="Only the friends you directly invite can view this quest">
+					<input type="radio" class="private-public private" href="<?= Uri::create($quest->url("access/private")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</input>
 				</label>
 			<?php endif; ?>
 		</div>
