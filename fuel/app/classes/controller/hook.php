@@ -17,24 +17,29 @@ class Controller_Hook extends Controller_App
 		{
 			if ($payload->branch() == 'test')
 			{
-				$payload->log('notice', 'Deploying to branch test.');
+				$repo = new PHPGit_Repository('/var/www/test');
 
-				$repo = new PHPGit_Repository('/var/www/shopgab');
+				$payload->log('notice', 'Deploying to branch test.');
 
 				if (! $repo->hasBranch('test'))
 				{
 					throw new Deployment_Exception("Branch 'test' does not exist on repository ");
 				}
 
-				$payload->log('input', 'pull origin test');
-				$output = $repo->git('pull origin test');
-				$payload->log('output', $output);
+				// reset head
+				$payload->log('input', '/var/www/test > git reset --hard');
+				$payload->log('output', $repo->git('reset --hard 2>&1'));
+
+				// git pull
+				$payload->log('input', '/var/www/test > git pull origin test');
+				$payload->log('output', $repo->git('pull origin test 2>&1'));
 			}
 
 			if ($payload->branch() == 'master')
 			{
 				$payload->log('notice', 'Deploying to branch master.');
 			}
+			$this->deploy_to_test();
 		}
 
 		catch (Exception $e)
@@ -43,9 +48,12 @@ class Controller_Hook extends Controller_App
 			throw $e;
 		}
 
-		
-			
-
 		return true;
+	}
+
+
+	protected function deploy_to_test()
+	{
+		
 	}
 }

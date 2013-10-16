@@ -220,7 +220,7 @@ class Model_Quest extends \Orm\Model
 			}
 		}
 
-		return "assets/img/no-product.png";
+		return Uri::create("assets/img/no-product.png");
 	}
 
 
