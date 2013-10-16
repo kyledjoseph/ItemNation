@@ -117,16 +117,16 @@
 					</div>
 					<div class="pull-right fix-pull-right">
 						<?php if (isset($user)): ?>
-						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->like_url(), '<i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp;
-						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <?= Html::anchor($quest_product->dislike_url(), '<i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_dislikes(), 'class' => 'user_product_vote')) ?>
-					<?php else: ?>
-					<span class="badge"><?= $quest_product->total_likes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i></a> &nbsp;
-					<span class="badge"><?= $quest_product->total_dislikes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i></a>
-				<?php endif; ?>
+						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->url('like'), '<i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp; 
+						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <?= Html::anchor($quest_product->url('dislike'), '<i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_dislikes(), 'class' => 'user_product_vote')) ?>
+						<?php else: ?>
+						<span class="badge"><?= $quest_product->total_likes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i></a> &nbsp;
+						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i></a>
+						<?php endif; ?>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
 <div class="modal fade comment-modal" id="commentsFor<?= $product_i ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -158,7 +158,7 @@
 						</div>
 					<?php endforeach; ?>
 
-					<?= Form::open(array('action' => $quest_product->comment_url(), 'class' => 'comment mx-comment-form',)) ?>
+					<?= Form::open(array('action' => $quest_product->url('comment'), 'class' => 'comment mx-comment-form',)) ?>
 					<div class="input-group">
 						<input name="comment" type="text" class="form-control" placeholder="What do you think?">
 						<span class="input-group-btn">
