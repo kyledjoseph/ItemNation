@@ -113,3 +113,9 @@ $(".public-private-radios label").click(function(event) {
     newURL = $(this).find('input').attr('href');
     window.location = newURL;
 });
+
+$('.private, .public').on('mouseenter', function () {
+    $(this).tooltip('show')
+});
+
+$('#element').tooltip('show')
