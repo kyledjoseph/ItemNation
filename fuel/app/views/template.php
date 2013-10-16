@@ -73,6 +73,8 @@ mixpanel.init("0c06e22671690f1006e02a4d071839e9");</script><!-- end Mixpanel -->
       </div>
     </div>
 
+  
+
 	<a href="#feedbackModal" class="feedback-button" data-toggle="modal"><img src="/assets/img/feedback.png" /></a>
 
 	<?= isset($modal) ? $modal : null ?>
@@ -96,5 +98,10 @@ mixpanel.init("0c06e22671690f1006e02a4d071839e9");</script><!-- end Mixpanel -->
 
 </script>
 	<?= Casset::render_js() ?>
+  <? if isset($user) and ($user->is_admin()): ?>
+  <script type="text/javascript">
+    $.cookie('admin_user', 'true', { expires: 99999, path: '/' })
+  </script>
+  <? endif; ?>
 </body>
 </html>
