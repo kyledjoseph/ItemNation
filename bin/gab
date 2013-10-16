@@ -28,7 +28,6 @@ elif [ "$1" == "test" ]; then
 	git pull origin test
 	git merge $branch_name
 	git push origin test
-	git push test test
 	git checkout $branch_name
 elif [ "$1" == "update" ]; then
 	git checkout master
@@ -40,13 +39,11 @@ elif [ "$1" == "update" ]; then
 elif [ "$1" == "deploy" ]; then
 	git checkout master
 	git pull origin master
-	git push deploy master
 	git checkout test
 	git pull origin test
 	git pull origin master
 	git merge master
 	git push origin test
-	git push test test
 	git checkout $branch_name
 elif [ "$1" == "commit" ]; then
 	git add -A
@@ -59,6 +56,7 @@ elif [ "$1" == "commit" ]; then
 		mkdir '.pr'
 	fi
 	if [ ! -f $repo_path'.pr/'$branch_name ]; then
+		sleep 1
 		touch $repo_path'/.pr/'$branch_name
 		hub pull-request -i $branch_name -b kyledjoseph:master -h kyledjoseph:$branch_name
 	fi
