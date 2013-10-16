@@ -5,12 +5,17 @@ if ($.cookie('old_user') == 'false' || $.cookie('old_user') == undefined) {
 	$.cookie('old_user', 'true', { expires: 99999, path: '/' })
 }
 
-$(".chat").scrollTop($(".chat")[0].scrollHeight);
+if ($.cookie('admin_user') != 'true') {
 mixpanel.track("View Quest");
-
 if (self_quest) {
     mixpanel.track("View Quest (self)");
 }
+}
+
+$(".chat").scrollTop($(".chat")[0].scrollHeight);
+
+
+
 
 $(".public-private-radios label").click(function(event) {
     newURL = $(this).find('input').attr('href');
