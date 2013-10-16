@@ -56,6 +56,7 @@ elif [ "$1" == "commit" ]; then
 		mkdir '.pr'
 	fi
 	if [ ! -f $repo_path'.pr/'$branch_name ]; then
+		sleep 1
 		touch $repo_path'/.pr/'$branch_name
 		hub pull-request -i $branch_name -b kyledjoseph:master -h kyledjoseph:$branch_name
 	fi
