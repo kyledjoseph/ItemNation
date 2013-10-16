@@ -183,8 +183,8 @@ mixpanel.init("0c06e22671690f1006e02a4d071839e9");</script><!-- end Mixpanel -->
 	ga('send', 'pageview');
 
 if ($.cookie('admin_user') != 'true') {
-    mixpanel.track("View Quest (self)");
-		mixpanel.track("Land");
+  mixpanel.track("View Quest (self)");
+	mixpanel.track("Land");
 }
 
 </script>
