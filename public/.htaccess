@@ -7,6 +7,9 @@
 	Options +FollowSymLinks -Indexes
 	RewriteEngine on
 
+        AddDefaultCharset UTF-8
+        Options +MultiViews
+
 	# NOTICE: If you get a 404 play with combinations of the following commented out lines
 	#AllowOverride All
 	#RewriteBase /wherever/fuel/is
@@ -54,3 +57,17 @@
 	</IfModule>
 
 </IfModule>
+
+<FilesMatch "\.(ico|pdf|jpg|jpeg|png|gif|mp3|mp4|swf|flv)$">
+    Header set Cache-Control "max-age=29030400, public, must-revalidate"
+</FilesMatch>
+
+<FilesMatch "\.(xml|html|css|js)$">
+    Header set Cache-Control "max-age=86400, public, must-revalidate"
+</FilesMatch>
+
+#Gzip
+<ifmodule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/json application/x-javascript application/javascript text/javascript
+</ifmodule>
+#End Gzip
