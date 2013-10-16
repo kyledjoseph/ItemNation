@@ -22,8 +22,24 @@ class Deployment_Payload extends \Orm\Model
 
 	public function set_data($data)
 	{
+		if (! $this->valid_github_ip())
+		{
+			//throw new Exception("Invalid github hook ip address '{$payload->request_ip()}'", 1);
+		}
+
 		$this->_response = json_decode($data);
 		$this->data = $data;
+		$this->ip   = $this->request_ip();
+		return $this->save();
+	}
+
+	public function log($type, $text)
+	{
+		$notice = new Deployment_Payload_Log;
+		$notice->deployment_payload_id = $this->id;
+		$notice->type = $type;
+		$notice->text = $text;
+		return $notice->save() ? $notice : false;
 	}
 
 	public function branch()
@@ -53,9 +69,4 @@ class Deployment_Payload extends \Orm\Model
 		return in_array($this->request_ip(), $valid_github_ips);
 	}
 
-	public function log()
-	{
-		$this->ip = $this->request_ip();
-		return $this->save();
-	}
 }

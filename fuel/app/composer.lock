@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "1a7a8044f3f9f0af039cede211741aa3",
+    "hash": "412c0f304dfa9ec39d2e6805cb9907ef",
     "packages": [
         {
             "name": "cartalyst/sentry",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cartalyst/sentry.git",
-                "reference": "7ca91a2b77782123f45e64d35d76f26cf02f85cb"
+                "reference": "a06bc3202d8001636152c9fe006383f53a692a99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/7ca91a2b77782123f45e64d35d76f26cf02f85cb",
-                "reference": "7ca91a2b77782123f45e64d35d76f26cf02f85cb",
+                "url": "https://api.github.com/repos/cartalyst/sentry/zipball/a06bc3202d8001636152c9fe006383f53a692a99",
+                "reference": "a06bc3202d8001636152c9fe006383f53a692a99",
                 "shasum": ""
             },
             "require": {
@@ -102,7 +102,7 @@
                 "laravel",
                 "security"
             ],
-            "time": "2013-10-05 01:35:27"
+            "time": "2013-10-09 09:17:12"
         },
         {
             "name": "hipchat/hipchat-php",
@@ -248,12 +248,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "64c9e48cc2c5fae7d8bc5b700b5c2ea24a164e9a"
+                "reference": "e1dfe0248b488af58fa2d011d88b8b67a87105bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/64c9e48cc2c5fae7d8bc5b700b5c2ea24a164e9a",
-                "reference": "64c9e48cc2c5fae7d8bc5b700b5c2ea24a164e9a",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/e1dfe0248b488af58fa2d011d88b8b67a87105bd",
+                "reference": "e1dfe0248b488af58fa2d011d88b8b67a87105bd",
                 "shasum": ""
             },
             "require": {
@@ -301,7 +301,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2013-10-04 20:22:07"
+            "time": "2013-10-08 02:11:25"
         },
         {
             "name": "illuminate/events",
@@ -443,6 +443,109 @@
             "time": "2013-04-30 19:58:08"
         },
         {
+            "name": "knplabs/github-api",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/php-github-api.git",
+                "reference": "e55c465f1eea1d9a4860e88e687717142ba77b4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/php-github-api/zipball/e55c465f1eea1d9a4860e88e687717142ba77b4f",
+                "reference": "e55c465f1eea1d9a4860e88e687717142ba77b4f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "kriswallsmith/buzz": ">=0.7",
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Github\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com",
+                    "homepage": "http://ornicar.github.com"
+                },
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                }
+            ],
+            "description": "GitHub API v3 client",
+            "homepage": "https://github.com/KnpLabs/php-github-api",
+            "keywords": [
+                "api",
+                "gh",
+                "gist",
+                "github"
+            ],
+            "time": "2013-08-30 21:41:55"
+        },
+        {
+            "name": "kriswallsmith/buzz",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kriswallsmith/Buzz.git",
+                "reference": "805272acb603161f0bc92380bbd801d5ffabf89d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/805272acb603161f0bc92380bbd801d5ffabf89d",
+                "reference": "805272acb603161f0bc92380bbd801d5ffabf89d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Buzz": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Lightweight HTTP client",
+            "homepage": "https://github.com/kriswallsmith/Buzz",
+            "keywords": [
+                "curl",
+                "http client"
+            ],
+            "time": "2013-09-12 13:09:33"
+        },
+        {
             "name": "mandrill/mandrill",
             "version": "1.0.37",
             "source": {
@@ -576,6 +679,47 @@
             "time": "2013-02-13 09:00:13"
         },
         {
+            "name": "ornicar/php-git-repo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ornicar/php-git-repo.git",
+                "reference": "dfcd5c4684c0c2beb56453132c2adc019868e71d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ornicar/php-git-repo/zipball/dfcd5c4684c0c2beb56453132c2adc019868e71d",
+                "reference": "dfcd5c4684c0c2beb56453132c2adc019868e71d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPGit_": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com",
+                    "homepage": "http://ornicar.github.com"
+                }
+            ],
+            "description": "An object oriented wrapper to run any Git command",
+            "homepage": "https://github.com/ornicar/php-git-repo",
+            "keywords": [
+                "git"
+            ],
+            "time": "2013-01-14 19:43:05"
+        },
+        {
             "name": "videlalvaro/php-amqplib",
             "version": "v2.0.2",
             "source": {
@@ -625,7 +769,8 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "hybridauth/hybridauth": 20
+        "hybridauth/hybridauth": 20,
+        "ornicar/php-git-repo": 20
     },
     "platform": [
 
