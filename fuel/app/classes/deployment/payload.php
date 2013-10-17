@@ -88,16 +88,17 @@ class Deployment_Payload extends \Orm\Model
 
 	public static function new_request($data)
 	{
-		if (! $this->valid_github_ip())
+		$payload = new static();
+		if (! $payload->valid_github_ip())
 		{
 			throw new Exception("Invalid github hook ip address '{$payload->request_ip()}'", 1);
 		}
 
-		$this->_response = json_decode($data);
-		$this->data      = $data;
-		$this->ip        = $this->request_ip();
+		$payload->_response = json_decode($data);
+		$payload->data      = $data;
+		$payload->ip        = $payload->request_ip();
 
-		return $this->save() ? $this : false;
+		return $payload->save() ? $payload : false;
 	}
 
 	public static function get_recent($limit = 30)
