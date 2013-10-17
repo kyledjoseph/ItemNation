@@ -17,4 +17,24 @@ class Deployment_Payload_Log extends \Orm\Model
 			'mysql_timestamp' => false,
 		),
 	);
+
+	public function date($format = "Y-m-d h:m:s")
+	{
+		return date($format, $this->created_at);
+	}
+
+	public function display_class_type()
+	{
+		// 'active'
+		// 'success'
+		// 'warning'
+		// 'danger'
+
+		$classes = array(
+			'input'  => 'warning',
+			'output' => 'success',
+		);
+
+		return array_key_exists($this->type, $classes) ? $classes[$this->type] : null;
+	}
 }

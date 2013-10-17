@@ -9,9 +9,8 @@ class Controller_Hook extends Controller_App
 
 	public function post_deploy()
 	{
-		$payload_data = Input::post('payload');
-		$payload = new Deployment_Payload;
-		$payload->set_data(html_entity_decode($payload_data));
+		$payload_data = Input::post('payload', false);
+		$payload      = Deployment_Payload::new_request(html_entity_decode($payload_data));
 
 		try
 		{

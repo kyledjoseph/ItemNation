@@ -20,27 +20,6 @@ class Deployment_Payload extends \Orm\Model
 
 	protected $_response = null;
 
-	public function set_data($data)
-	{
-		if (! $this->valid_github_ip())
-		{
-			//throw new Exception("Invalid github hook ip address '{$payload->request_ip()}'", 1);
-		}
-
-		$this->_response = json_decode($data);
-		$this->data = $data;
-		$this->ip   = $this->request_ip();
-		return $this->save();
-	}
-
-	public function log($type, $text)
-	{
-		$notice = new Deployment_Payload_Log;
-		$notice->deployment_payload_id = $this->id;
-		$notice->type = $type;
-		$notice->text = $text;
-		return $notice->save() ? $notice : false;
-	}
 
 	public function branch()
 	{
@@ -57,6 +36,21 @@ class Deployment_Payload extends \Orm\Model
 		return explode('/', $this->_response->ref);
 	}
 
+	public function pretty_data()
+	{
+		return stripslashes(json_encode(json_decode($this->data), JSON_PRETTY_PRINT));
+	}
+
+	public function date($format = "r")
+	{
+		return date($format, $this->created_at);
+	}
+
+	public function ago($period = 'year')
+	{
+		return Date::time_ago($this->created_at, null, $period);
+	}
+
 	public function request_ip()
 	{
 		return Input::ip();
@@ -65,8 +59,55 @@ class Deployment_Payload extends \Orm\Model
 	public function valid_github_ip()
 	{
 		// https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist
-		$valid_github_ips = array('204.232.175.64', '204.232.175.27', '192.30.252.0', '192.30.252.22');
-		return in_array($this->request_ip(), $valid_github_ips);
+		// $valid_github_ips = array('204.232.175.64', '204.232.175.27', '192.30.252.0', '192.30.252.22');
+		// return in_array($this->request_ip(), $valid_github_ips);
+
+		return true;
+	}
+
+
+
+	/**
+	 *
+	 */
+	public function log($type, $text)
+	{
+		$notice = new Deployment_Payload_Log;
+		$notice->deployment_payload_id = $this->id;
+		$notice->type = $type;
+		$notice->text = $text;
+		return $notice->save() ? $notice : false;
+	}
+
+	public function get_logs()
+	{
+		return Deployment_Payload_Log::query()->where('deployment_payload_id', $this->id)->order_by('created_at', 'asc')->get();
+	}
+
+
+
+	public function new_request($data)
+	{
+		if (! $this->valid_github_ip())
+		{
+			throw new Exception("Invalid github hook ip address '{$payload->request_ip()}'", 1);
+		}
+
+		$this->_response = json_decode($data);
+		$this->data      = $data;
+		$this->ip        = $this->request_ip();
+
+		return $this->save() ? $this : false;
+	}
+
+	public static function get_recent($limit = 30)
+	{
+		return static::query()->order_by('created_at', 'desc')->limit($limit)->get();
+	}
+
+	public static function get_by_id($id)
+	{
+		return static::query()->where('id', $id)->get_one();
 	}
 
 }
