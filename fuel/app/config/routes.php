@@ -26,6 +26,7 @@ return array(
 	'quest/(:segment)/invite/email'       => 'quests/invite_email/$1',
 	'quest/(:segment)/invite/friends'     => 'quests/invite_friends/$1',
 	'quest/(:segment)/edit'               => 'quests/edit/$1',
+	'quest/(:segment)/close/(:segment)'   => 'quests/close/$1/$2',
 	'quest/(:segment)/delete'             => 'quests/delete/$1',
 	'quest/(:segment)'                    => 'quests/view/$1',
 	'quest'                               => 'quests/index',

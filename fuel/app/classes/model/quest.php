@@ -11,6 +11,8 @@ class Model_Quest extends \Orm\Model
 		'purchase_within',
 		'purchase_by',
 		'default_product_id',
+		'purchased_product_id',
+		'is_open',
 		'is_public',
 		'created_at',
 		'updated_at',
@@ -106,6 +108,37 @@ class Model_Quest extends \Orm\Model
 		return $this->is_public == '0';
 	}
 
+	public function is_open()
+	{
+		return $this->is_open == '1';
+	}
+
+	public function is_closed()
+	{
+		return $this->is_closed == '0';
+	}
+
+	public function open()
+	{
+		$this->is_open = 1;
+		return $this->save();
+	}
+
+	public function close()
+	{
+		$this->is_open = 0;
+		return $this->save();
+	}
+
+
+	/**
+	 *
+	 */
+	public function purchased_product(Model_Quest_Product $quest_product)
+	{
+		$this->purchased_product_id = $quest_product->id;
+		return $this->save();
+	}
 
 
 	public function purchase_within_option()
@@ -154,6 +187,13 @@ class Model_Quest extends \Orm\Model
 	}
 
 
+	public function purchase_by_relative()
+	{
+		$days = abs($this->purchase_within());
+		$unit = Inflector::pluralize('day', $days);
+
+		return "ended {$days} {$unit} ago";
+	}
 
 
 
@@ -180,7 +220,7 @@ class Model_Quest extends \Orm\Model
 			}
 		}
 
-		return "assets/img/no-product.png";
+		return Uri::create("assets/img/no-product.png");
 	}
 
 
@@ -418,6 +458,7 @@ class Model_Quest extends \Orm\Model
 			'user_id'         => $user_id,
 			'name'            => $name,
 			'description'     => $description,
+			'is_open'         => 1,
 			'is_public'       => 1,
 		));
 
