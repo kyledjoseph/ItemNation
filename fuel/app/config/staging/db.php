@@ -6,7 +6,7 @@
 return array(
 	'default' => array(
 		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=beta',
+			'dsn'        => 'mysql:host=localhost;dbname=staging',
 			'username'   => 'root',
 			'password'   => 'RLJGwdbsEQ6pbJ6',
 		),

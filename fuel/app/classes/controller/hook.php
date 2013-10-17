@@ -28,6 +28,7 @@ class Controller_Hook extends Controller_App
 				}
 				
 				//TODO $deployment->repo->exec('fetch origin');
+				//TODO $deployment->notification->hipchat->message_room('Notifications', 'Deploy', 'This is just a test message!');
 
 				// fetch
 				$payload->log('input', "{$path} > git fetch origin");
@@ -40,15 +41,12 @@ class Controller_Hook extends Controller_App
 				// git pull
 				$payload->log('input', "{$path} > git pull origin test");
 				$payload->log('output', $repo->git('pull origin test 2>&1'));
-
-				$deployment->notification->hipchat->message_room('Notifications', 'Deploy', 'This is just a test message!');
 			}
 
 			if ($payload->branch() == 'master')
 			{
 				$payload->log('notice', 'Deploying to branch master.');
 			}
-
 		}
 
 		catch (Exception $e)
@@ -58,11 +56,5 @@ class Controller_Hook extends Controller_App
 		}
 
 		return true;
-	}
-
-
-	protected function deploy_to_test()
-	{
-		
 	}
 }

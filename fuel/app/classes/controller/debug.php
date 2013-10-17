@@ -5,29 +5,16 @@ class Controller_Debug extends Controller_App
 
 	public function get_git()
 	{
-		$path = '/Users/tmatthews/Sites/git';
-		$php  = '/Applications/MAMP/bin/php/php5.4.10/bin/php';
-		
-		$repo = new PHPGit_Repository($path, true);
+		echo shell_exec("cd /var/www/test && git pull origin test 2>&1");
 
-		echo shell_exec("cd $path && pwd && whoami && /usr/bin/git status 2>&1");
+		// $repo = new PHPGit_Repository('/var/www/test');
 
-		// echo shell_exec("cd $path && $php oil r digest 2>&1");
-
-		// if (! $repo->hasBranch('master'))
+		// if (! $repo->hasBranch('test'))
 		// {
-		// 	throw new Exception("repo has no branch master");
+		// 	throw new Deployment_Exception("Branch 'test' does not exist on repository ");
 		// }
 
-		// echo $repo->getCurrentBranch();
-
-		//$repo->git('status');
-
-		//echo exec('cd /' . $loc . ' && git status', $out);
-
-		//echo var_export($out)
-
-		// echo shell_exec("cd $path && git status 2>&1");
+		// echo $repo->git('pull origin test');
 
 		return true;
 	}
