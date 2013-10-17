@@ -86,7 +86,7 @@ class Deployment_Payload extends \Orm\Model
 
 
 
-	public function new_request($data)
+	public static function new_request($data)
 	{
 		if (! $this->valid_github_ip())
 		{
