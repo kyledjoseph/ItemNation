@@ -27,7 +27,7 @@ class Controller_Home extends Controller_App
 
 			$this->template->body = View::forge('user/dashboard', array(
 				'quests' => $this->user->get_open_quests(),
-				'close_quest' => isset($close_quest) ? $close_quest : null,
+				//'close_quest' => isset($close_quest) ? $close_quest : null,
 			));
 
 
