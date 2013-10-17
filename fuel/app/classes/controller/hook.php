@@ -17,7 +17,7 @@ class Controller_Hook extends Controller_App
 		{
 			if ($payload->branch() == 'test')
 			{
-				$path = '/var/www/test'
+				$path = '/var/www/test';
 				$repo = new PHPGit_Repository($path);
 
 				$payload->log('notice', 'Deploying to branch test.');
@@ -26,9 +26,8 @@ class Controller_Hook extends Controller_App
 				{
 					throw new Deployment_Exception("Branch 'test' does not exist on repository ");
 				}
-
 				
-				//TODO $deployment->repository->exec('fetch origin');
+				//TODO $deployment->repo->exec('fetch origin');
 
 				// fetch
 				$payload->log('input', "{$path} > git fetch origin");
@@ -41,6 +40,8 @@ class Controller_Hook extends Controller_App
 				// git pull
 				$payload->log('input', "{$path} > git pull origin test");
 				$payload->log('output', $repo->git('pull origin test 2>&1'));
+
+				$deployment->notification->hipchat->message_room('Notifications', 'Deploy', 'This is just a test message!');
 			}
 
 			if ($payload->branch() == 'master')

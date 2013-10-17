@@ -30,6 +30,7 @@ class Deployment_Payload_Log extends \Orm\Model
 		// 'warning'
 		// 'danger'
 
+		//TODO move to config
 		$classes = array(
 			'input'     => 'warning',
 			'output'    => 'success',
