@@ -25,7 +25,7 @@
 			<th>#</th>
 			<th>Type</th>
 			<th>Details</th>
-			<th></th>
+			<th>Date</th>
 		</tr>
 	</thead>
 	<tbody>

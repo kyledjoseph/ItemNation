@@ -11,6 +11,7 @@ class Controller_Hook extends Controller_App
 	{
 		$payload_data = Input::post('payload', false);
 		$payload      = Deployment_Payload::new_request(html_entity_decode($payload_data));
+		$deployment   = new Deployment;
 
 		try
 		{
@@ -25,6 +26,9 @@ class Controller_Hook extends Controller_App
 				{
 					throw new Deployment_Exception("Branch 'test' does not exist on repository ");
 				}
+
+				
+				//TODO $deployment->repository->exec('fetch origin');
 
 				// fetch
 				$payload->log('input', "{$path} > git fetch origin");

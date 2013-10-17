@@ -31,8 +31,9 @@ class Deployment_Payload_Log extends \Orm\Model
 		// 'danger'
 
 		$classes = array(
-			'input'  => 'warning',
-			'output' => 'success',
+			'input'     => 'warning',
+			'output'    => 'success',
+			'exception' => 'danger',
 		);
 
 		return array_key_exists($this->type, $classes) ? $classes[$this->type] : null;
