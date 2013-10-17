@@ -433,7 +433,12 @@ class Model_User extends \Orm\Model
 	 */
 	public function get_open_quests()
 	{
-		return Model_Quest::query()->where('user_id', $this->id)->where('is_open', 1)->where('purchase_by', '>', time())->order_by('name', 'asc')->get();
+		return Model_Quest::query()
+			->where('user_id', $this->id)
+			//->where('is_open', 1)
+			//->where('purchase_by', '>', time())
+			->order_by('name', 'asc')
+			->get();
 	}
 
 	/**

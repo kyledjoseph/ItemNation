@@ -32,14 +32,14 @@ class Controller_Home extends Controller_App
 
 
 			// close quest window
-			$expired_quest = $this->user->get_expired_quest();
+			// $expired_quest = $this->user->get_expired_quest();
 
-			if ($expired_quest)
-			{
-				$this->template->body->close_quest = View::forge('user/close_quest', array(
-					'quest' => $expired_quest,
-				));
-			}
+			// if ($expired_quest)
+			// {
+			// 	$this->template->body->close_quest = View::forge('user/close_quest', array(
+			// 		'quest' => $expired_quest,
+			// 	));
+			// }
 		}
 
 	}
