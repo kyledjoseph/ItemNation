@@ -24,9 +24,22 @@ class Controller_Home extends Controller_App
 			Casset::js('site/dashboard/tour.js');
 			$this->add_modal(View::forge('user/modal/start_quest'));
 
+
 			$this->template->body = View::forge('user/dashboard', array(
-				'quests' => $this->user->get_quests(),
+				'quests' => $this->user->get_open_quests(),
+				//'close_quest' => isset($close_quest) ? $close_quest : null,
 			));
+
+
+			// close quest window
+			// $expired_quest = $this->user->get_expired_quest();
+
+			// if ($expired_quest)
+			// {
+			// 	$this->template->body->close_quest = View::forge('user/close_quest', array(
+			// 		'quest' => $expired_quest,
+			// 	));
+			// }
 		}
 
 	}

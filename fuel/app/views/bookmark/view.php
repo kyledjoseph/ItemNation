@@ -41,7 +41,9 @@ mixpanel.init("0c06e22671690f1006e02a4d071839e9");</script><!-- end Mixpanel -->
 		</div>
 
 <script type="text/javascript">
-$(".add").click(function() {
+if ($.cookie('admin_user') != 'true') {
+	$(".add").click(function() {
     mixpanel.track("Add product");
-});
+	});
+}
 </script>
