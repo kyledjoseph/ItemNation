@@ -431,9 +431,46 @@ class Model_User extends \Orm\Model
 	/**
 	 *
 	 */
+	public function get_open_quests()
+	{
+		return Model_Quest::query()
+			->where('user_id', $this->id)
+			//->where('is_open', 1)
+			//->where('purchase_by', '>', time())
+			->order_by('name', 'asc')
+			->get();
+	}
+
+	/**
+	 * All expired quests
+	 */
+	public function get_expired_quests()
+	{
+		return Model_Quest::query()->where('user_id', $this->id)->where('is_open', 1)->where('purchase_by', '<', time())->order_by('purchase_by', 'desc')->get();
+	}
+
+	/**
+	 * The most recently expired quest
+	 */
+	public function get_expired_quest()
+	{
+		return Model_Quest::query()->where('user_id', $this->id)->where('is_open', 1)->where('purchase_by', '<', time())->order_by('purchase_by', 'desc')->get_one();
+	}
+
+	/**
+	 * 
+	 */
+	public function get_closed_quests()
+	{
+		return Model_Quest::query()->where('user_id', $this->id)->where('is_open', 0)->order_by('name', 'asc')->get();
+	}
+
+	/**
+	 * 
+	 */
 	public function get_public_quests()
 	{
-		return Model_Quest::query()->where('user_id', $this->id)->where('is_public', 1)->order_by('name', 'asc')->get();
+		return Model_Quest::query()->where('user_id', $this->id)->where('is_open', 1)->where('is_public', 1)->order_by('name', 'asc')->get();
 	}
 
 	/**
