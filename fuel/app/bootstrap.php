@@ -9,22 +9,19 @@ require COREPATH.'bootstrap.php';
 
 
 Autoloader::add_classes(array(
-	// Add classes you want to override here
-	// Example: 'View' => APPPATH.'classes/view.php',
+        // Add classes you want to override here
+        // Example: 'View' => APPPATH.'classes/view.php',
 ));
 
 // Register the autoloader
 Autoloader::register();
-
-// load the Composer autoloader
-require APPPATH.'vendor/autoload.php';
 
 /**
  * Your environment.  Can be set to any of the following:
  *
  * Fuel::DEVELOPMENT
  * Fuel::TEST
- * Fuel::STAGE
+ * Fuel::STAGING
  * Fuel::PRODUCTION
  */
 Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : Fuel::DEVELOPMENT);

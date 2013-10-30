@@ -1,0 +1,48 @@
+{
+    "name": "fuel/fuel",
+    "type": "metapackage",
+    "description": "The FuelPHP framework",
+    "keywords": ["framework"],
+    "homepage": "http://fuelphp.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "FuelPHP Development Team",
+            "email": "team@fuelphp.com"
+        }
+    ],
+    "support": {
+        "irc": "irc://irc.freenode.org/fuelphp",
+        "forum": "http://fuelphp.com/forums"
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "monolog/monolog": "1.5.*",
+        "fuelphp/upload": "2.0.1",
+        "videlalvaro/php-amqplib": "v2.0.2",
+        "hybridauth/hybridauth": "dev-master",
+        "cartalyst/sentry": "2.0.*",
+        "illuminate/database": "4.0.*",
+        "ircmaxell/password-compat": "1.0.*",
+        "mandrill/mandrill": "1.0.37",
+        "omissis/php-cloudfiles": "v1.7.13",
+        "hipchat/hipchat-php": "v1.2",
+        "knplabs/github-api": "1.1.4",
+        "ornicar/php-git-repo": "dev-master"
+    },
+    "suggest": {
+        "mustache/mustache": "Allow Mustache templating with the Parser package",
+        "smarty/smarty": "Allow Smarty templating with the Parser package",
+        "twig/twig": "Allow Twig templating with the Parser package",
+        "mthaml/mthaml": "Allow Haml templating with Twig supports with the Parser package"
+    },
+    "config": {
+        "vendor-dir": "fuel/vendor"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php oil r install"
+        ]
+    },
+    "minimum-stability": "dev"
+}
