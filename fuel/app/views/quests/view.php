@@ -36,18 +36,18 @@
 
 		<div class="btn-group marg-bottom full-width public-private-radios" data-toggle="buttons">
 			<?php if ($quest->is_public): ?>
-				<label class="btn btn-primary active" style="width:50%">
-					<input type="radio" id="private-public" class="" href="<?= Uri::create($quest->url("access/public")) ?>"><i class="icon-unlock icon-large"></i>&nbsp;&nbsp;&nbsp;Public</input>
+				<label class="btn btn-primary active public" title="All of your friends with ShopGab accounts can view this quest" style="width:50%">
+					<input type="radio" class="private-public" href="<?= Uri::create($quest->url("access/public")) ?>"><i class="icon-unlock icon-large"></i>&nbsp;&nbsp;&nbsp;Public</input>
 				</label>
-				<label class="btn btn-primary" style="width:50%">
-					<input type="radio" id="private-public" class="" href="<?= Uri::create($quest->url("access/private")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</input>
+				<label class="btn btn-primary private" style="width:50%" title="Only the friends you directly invite can view this quest">
+					<input type="radio" class="private-public" href="<?= Uri::create($quest->url("access/private")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</input>
 				</label>
 			<?php else: ?>
-				<label class="btn btn-primary" style="width:50%">
-					<input type="radio" id="private-public" class="" href="<?= Uri::create($quest->url("access/public")) ?>"><i class="icon-unlock icon-large"></i>&nbsp;&nbsp;&nbsp;Public</input>
+				<label class="btn btn-primary public" style="width:50%" title="All of your friends with ShopGab accounts can view this quest">
+					<input type="radio" class="private-public" href="<?= Uri::create($quest->url("access/public")) ?>"><i class="icon-unlock icon-large"></i>&nbsp;&nbsp;&nbsp;Public</input>
 				</label>
-				<label class="btn btn-primary active" style="width:50%">
-					<input type="radio" id="private-public" class="" href="<?= Uri::create($quest->url("access/private")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</input>
+				<label class="btn btn-primary active private" style="width:50%" title="Only the friends you directly invite can view this quest">
+					<input type="radio" class="private-public private" href="<?= Uri::create($quest->url("access/private")) ?>"><i class="icon-lock icon-large"></i>&nbsp;&nbsp;&nbsp;Private</input>
 				</label>
 			<?php endif; ?>
 		</div>
@@ -117,16 +117,16 @@
 					</div>
 					<div class="pull-right fix-pull-right">
 						<?php if (isset($user)): ?>
-						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->like_url(), '<i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp;
-						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <?= Html::anchor($quest_product->dislike_url(), '<i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_dislikes(), 'class' => 'user_product_vote')) ?>
-					<?php else: ?>
-					<span class="badge"><?= $quest_product->total_likes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i></a> &nbsp;
-					<span class="badge"><?= $quest_product->total_dislikes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i></a>
-				<?php endif; ?>
+						<span class="badge"><?= $quest_product->total_likes() ?></span> <?= Html::anchor($quest_product->url('like'), '<i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_likes(), 'class' => 'user_product_vote')) ?> &nbsp; 
+						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <?= Html::anchor($quest_product->url('dislike'), '<i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i>', array('title' => $quest_product->list_user_dislikes(), 'class' => 'user_product_vote')) ?>
+						<?php else: ?>
+						<span class="badge"><?= $quest_product->total_likes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-up-alt faded no-dec icon-large mx-rate"></i></a> &nbsp;
+						<span class="badge"><?= $quest_product->total_dislikes() ?></span> <a href="#registerModal" data-toggle="modal"><i class="icon-thumbs-down-alt faded no-dec icon-large mx-rate"></i></a>
+						<?php endif; ?>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
 
 <div class="modal fade comment-modal" id="commentsFor<?= $product_i ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -158,7 +158,7 @@
 						</div>
 					<?php endforeach; ?>
 
-					<?= Form::open(array('action' => $quest_product->comment_url(), 'class' => 'comment mx-comment-form',)) ?>
+					<?= Form::open(array('action' => $quest_product->url('comment'), 'class' => 'comment mx-comment-form',)) ?>
 					<div class="input-group">
 						<input name="comment" type="text" class="form-control" placeholder="What do you think?">
 						<span class="input-group-btn">
