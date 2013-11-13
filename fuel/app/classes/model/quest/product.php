@@ -215,9 +215,9 @@ class Model_Quest_Product extends \Orm\Model
 		return Model_Quest_Product_Comment::query()->where('quest_product_id', $this->id)->order_by('created_at', 'asc')->get();
 	}
 
-	public function add_comment($quest_product_id, $user_id, $text)
+	public function add_comment($user_id, $text)
 	{
-		$comment = Model_Quest_Product_Comment::create_comment($quest_product_id, $user_id, $text);
+		$comment = Model_Quest_Product_Comment::create_comment($this->id, $user_id, $text);
 		$notice  = Model_Notification::new_comment($user_id, $this->quest, $comment->id);
 
 		$this->quest->add_participant($user_id);

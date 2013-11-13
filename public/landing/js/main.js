@@ -314,8 +314,8 @@ function resizeBackground () {
 	// Background should stretch to entire window height
 	$('.background').css('height', size.window.height);
 
-	// Foreground should stretch to either half height or 120% width, whichever is larger.
-	var newHeight = Math.min(size.window.height*0.5, size.window.width * 1.2 / size.foreground.scale);
+	// Foreground should stretch to either half height or 110% width, whichever is larger.
+	var newHeight = Math.min(size.window.height*0.5, size.window.width * 1.1 / size.foreground.scale);
 	//$('.video').css('height', newHeight-(newHeight*.9));
 	$('.foreground').css('height', newHeight);
 	$('.video').css('width', (newHeight * size.foreground.scale)*0.82);

@@ -20,7 +20,7 @@
 			<div class="control-group account-form">
 				<label class="control-label" for="inputEmail">Facebook:</label>
 				<div class="controls">
-					<span class="facebook-account"><?= $user->is_authenticated_with('facebook') ? "Authenticated as {$user->user_authentication('facebook')->email}" : Html::anchor('auth/facebook?r=account', 'Login with Facebook') ?></span>
+					<span class="facebook-account"><?= $user->is_authenticated_with('facebook') ? "Authenticated as {$user->email}" : Html::anchor('login/facebook?r=account', 'Login with Facebook') ?></span>
 				</div>
 			</div>
 
@@ -68,7 +68,7 @@
 				</div>
 			</div>
 
-			<?php if ($user->is_authenticated_with('facebook') and $user->avatar_type() !== 'facebook'): ?>
+			<?php if ($user->is_authenticated_with('facebook')): ?>
 
 			<div class="control-group account-form">
 				<div class="controls">

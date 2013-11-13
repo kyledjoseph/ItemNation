@@ -17,7 +17,6 @@ class Controller_Bookmark extends Controller_App
 		//Config::set('profiling', false); // not working
 	}
 
-
 	/**
 	 * Bookmark
 	 */
@@ -31,11 +30,17 @@ class Controller_Bookmark extends Controller_App
 		$this->template->body = View::forge('bookmark/view', array());
 	}
 
+	/**
+	 * 
+	 */
 	public function get_test()
 	{
 		return View::forge('bookmark/test');
 	}
 
+	/**
+	 * 
+	 */
 	public function get_iframe()
 	{
 		return View::forge('bookmark/iframe');
@@ -58,7 +63,7 @@ class Controller_Bookmark extends Controller_App
 
 		if (! in_array($post->add_to, array('my', 'friend', 'new')))
 		{
-			return Response::forge(json_encode(array('success' => true, 'message' => 'invalid_product_destination')));
+			return array('success' => true, 'message' => 'invalid_product_destination');
 		}
 
 		// create product
@@ -85,7 +90,7 @@ class Controller_Bookmark extends Controller_App
 				$quest = $this->user->get_quest($post->my_quest_url);
 				if (! isset($quest))
 				{
-					return Response::forge(json_encode(array('success' => true, 'message' => 'invalid_quest_id')));
+					return array('success' => true, 'message' => 'invalid_quest_id');
 				}
 
 				$quest->add_product($product->id);
@@ -96,13 +101,13 @@ class Controller_Bookmark extends Controller_App
 				$friend = $this->user->get_friend_by_id($post->friend_id);
 				if (! isset($friend))
 				{
-					return Response::forge(json_encode(array('success' => true, 'message' => 'invalid_friend_id')));
+					return array('success' => true, 'message' => 'invalid_friend_id');
 				}
 
 				$quest = $friend->get_quest($post->friend_quest_id);
 				if (! isset($quest))
 				{
-					return Response::forge(json_encode(array('success' => true, 'message' => 'invalid_friend_quest_id')));
+					return array('success' => true, 'message' => 'invalid_friend_quest_id');
 				}
 
 				$quest->add_product($product->id, $this->user->id);
@@ -116,17 +121,16 @@ class Controller_Bookmark extends Controller_App
 				break;
 				
 			default:
-				return Response::forge(json_encode(array('success' => true, 'message' => 'invalid_product_destination')));
+				return array('success' => true, 'message' => 'invalid_product_destination');
 				
 		}
 
-		return Response::forge(json_encode(array(
+		return array(
 			'success'    => true,
 			'user_id'    => $product->user_id,
 			'product_id' => $product->id,
-		)));
+		);
 	}
-
 
 	/**
 	 * Bookmark Install
@@ -135,7 +139,6 @@ class Controller_Bookmark extends Controller_App
 	{
 		return Response::forge(View::forge('bookmark/install'));
 	}
-
 
 	/**
 	 * Bookmark User Login
@@ -150,99 +153,46 @@ class Controller_Bookmark extends Controller_App
 		$this->template->body = View::forge('bookmark/login');
 	}
 
-	public function post_login()
-	{
-		$post    = $this->post_data('email', 'password');
-		$success = $this->auth->login($post->email, $post->password);
-
-		if (! $success)
-		{
-			$this->redirect('bookmark/login', 'error', 'Invalid login.');
-		}
-
-		$this->redirect('bookmark/view');
-	}
-
-	public function get_auth($provider)
-	{
-		$provider = strtolower($provider);
-
-		if (! in_array($provider, ['facebook', 'twitter', 'google']))
-		{
-			$this->redirect('bookmark/login', 'info', 'Invalid service provider');
-		}
-
-		$login_success = $this->auth->social_auth($provider);
-
-		if (! $login_success)
-		{
-			$this->redirect('bookmark/login', 'error', 'An error has occurred');
-		}
-
-		$this->redirect('bookmark/view');
-
-	}
-
-
 	/**
-	 * Bookmark User Register
+	 * 
 	 */
-	public function get_register()
+	public function get_auth()
 	{
-		if ($this->user_logged_in())
-		{
-			$this->redirect('bookmark/view');
-		}
-		
-		$this->template->body = View::forge('bookmark/register');
+		$opauth = Auth_Social::forge([
+			'provider'     => 'Facebook',
+			'callback_url' => Uri::create('bookmark/callback'),
+		]);
 	}
 
-	public function post_register()
+	public function get_callback()
 	{
-		$post = $this->post_data('email', 'password');
-		$user = $this->auth->create_user($post->email, $post->password);
+		$opauth = Auth_Social::forge(false);
 
-		if (! isset($user))
+		if (! $user = $opauth->login())
 		{
-			$this->redirect('user/register', 'error', 'Invalid email or password.');
+			throw new Exception("Error Processing Request", 1);
 		}
 
-		$this->auth->login($post->email, $post->password);
-		$this->redirect('/', 'info', 'You are now registered.');
+		$this->redirect('bookmark/view');
 	}
-
-
-	public function post_log()
-	{
-		$post = $this->post_data('url', 'error');
-		$success = Model_Log_Bookmark_Error::log_error($post->url, $post->error);
-		return Response::forge(array('success' => $success));
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	/**
 	 * 
 	 */
 	public function get_login_check()
 	{
-		return Response::forge(json_encode(array('logged_in' => $this->user_logged_in())));
+		return array('logged_in' => $this->user_logged_in());
 	}
 
+	/**
+	 * 
+	 */
+	public function post_log()
+	{
+		$post = $this->post_data('url', 'error');
+		$success = Model_Log_Bookmark_Error::log_error($post->url, $post->error);
+		return Response::forge(array('success' => $success));
+	}
 
 	/**
 	 * 
@@ -251,32 +201,21 @@ class Controller_Bookmark extends Controller_App
 	{
 		if (! $this->user_logged_in())
 		{
-			return Response::forge(json_encode(array(
-				'success' => false,
-				'type'    => 'invalid_friend_id',
-			)));
+			return array('success' => false, 'type' => 'invalid_friend_id');
 		}
 
 		$friend = $this->user->get_friend_by_id($friend_id);
 
 		if (! isset($friend))
 		{
-			return Response::forge(json_encode(array(
-				'success' => false,
-				'type'    => 'invalid_friend_id',
-			)));
+			return array('success' => false, 'type' => 'invalid_friend_id');
 		}
 
 
 
-		return Response::forge(json_encode(array(
-			'success' => true,
-			'quests'  => $friend->select_quest(),
-		)));
+		return array('success' => true, 'quests' => $friend->select_quest());
 	}
 	
-
-
 	/**
 	 * 
 	 */
@@ -284,10 +223,7 @@ class Controller_Bookmark extends Controller_App
 	{
 		if (! $this->user_logged_in())
 		{
-			return Response::forge(json_encode(array(
-				'success' => false,
-				'type'    => 'auth',
-			)));
+			return array('success' => false, 'type' => 'auth',);
 		}
 
 		$forums = Model_Forum::get_by_user_id($this->user->id);
@@ -301,12 +237,11 @@ class Controller_Bookmark extends Controller_App
 			));
 		}
 
-		return Response::forge(json_encode(array(
+		return array(
 			'success' => true,
 			'forums'  => $output,
-		)));
+		);
 	}
-
 
 	/**
 	 *
@@ -319,10 +254,7 @@ class Controller_Bookmark extends Controller_App
 			'name' => $post->name,
 		));
 
-		return Response::forge(json_encode(array(
-			'id'   => $forum->id,
-			'name' => $forum->name,
-		)));
+		return array('id' => $forum->id, 'name' => $forum->name);
 	}
 
 }

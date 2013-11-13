@@ -22,6 +22,7 @@ class Controller_Home extends Controller_App
 		else
 		{
 			Casset::js('site/dashboard/tour.js');
+			Casset::js('site/dashboard.js');
 			$this->add_modal(View::forge('user/modal/start_quest'));
 
 			$this->template->body = View::forge('user/dashboard', array(

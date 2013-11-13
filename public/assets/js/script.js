@@ -51,17 +51,8 @@ $(".mx-install-extension").click(function() {
 
 mixpanel.track_forms(".mx-chat-form", "Chat");
 
-mixpanel.track_forms(".mx-comment-form", "Comment");
 
 
-$(".user_product_vote").click(function() {
-    event.preventDefault();
-    newURL = $(this).attr('href');
-    mixpanel.track("Rate", null, function() {
-        console.log(newURL);
-        window.location = newURL;
-    });
-});
 
 $('.landing-sign-up').click(function() {
      mixpanel.track("Sign Up");

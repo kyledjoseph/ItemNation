@@ -8,7 +8,7 @@
 			<div class="modal-body">
 					<div class="row">
 						<div class="col-12 col-sm-6 social-login">
-							<?= Html::anchor('auth/facebook?r=' . Uri::string(), Asset::img('facebook-login.png')) ?>
+							<?= Html::anchor('login/facebook?r=' . Uri::string(), Asset::img('facebook-login.png')) ?>
 						</div>
 						<div class="col-12 col-sm-6 form-login">
 							<?= Form::open(array('action' => 'login')) ?>

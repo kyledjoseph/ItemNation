@@ -87,9 +87,13 @@ class Controller_Friends extends Controller_App
 	 */
 	public function get_refresh()
 	{
-		$total_added = $this->user->add_registered_facebook_friends();
+		if (! $new_friends = $this->user->update_facebook_friends())
+		{
+			$this->redirect('friends', 'info', "No new friends added");
+		}
 
-		$this->redirect('friends', 'info', "$total_added friends have been added");
+		$total_added = count($new_friends);
+		$this->redirect('friends', 'info', "{$total_added} friends have been added");
 	}
 
 }

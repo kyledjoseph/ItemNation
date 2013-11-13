@@ -11,7 +11,7 @@
  */
 
 return array(
-	'driver' => 'SiteAuth',
+	'driver' => 'Ormauth',
 	'verify_multiple_logins' => false,
 	'salt' => 'RVkNHuwhz7Ru842',
 );

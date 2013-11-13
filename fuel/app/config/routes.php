@@ -1,19 +1,21 @@
 <?php
 return array(
-	'_root_'                   => 'home/index',
-	'_404_'                    => 'error/404',
+	'_root_'                              => 'home/index',
+	'_404_'                               => 'error/404',
 
-	'bookmark'                 => 'bookmark/view',
+	'bookmark'                            => 'bookmark/view',
 
-	'try'                      => 'home/try',
-	'login'                    => 'user/login',
-	'auth/(:any)'              => 'user/auth/$1',
-	'logout'                   => 'user/logout',
-	'register'                 => 'user/register',
-	'forgot'                   => 'user/forgot',
-	'reset/(:segment)'         => 'user/reset/$1',
-	'account/(:any)'           => 'user/$1',
-	'account'                  => 'user/account',
+	'login/(:any)'                        => 'user/auth/login/$1',
+	'authenticate/(:any)'                 => 'user/auth/authenticate/$1',
+	'logout'                              => 'user/auth/logout',
+	'authenticate'                        => 'user/auth/authenticate',
+	// 'register'                         => 'user/register',
+	// 'forgot'                           => 'user/forgot',
+	// 'reset/(:segment)'                 => 'user/reset/$1',
+
+	'try'                                 => 'home/try',
+	'account/(:any)'                      => 'user/$1',
+	'account'                             => 'user/account',
 
 	'quest/create'                        => 'quests/create',
 	'quest/(:segment)/remove/(:segment)'  => 'quests/remove/$1/$2',
@@ -29,7 +31,6 @@ return array(
 	'quest/(:segment)/delete'             => 'quests/delete/$1',
 	'quest/(:segment)'                    => 'quests/view/$1',
 	'quest'                               => 'quests/index',
-
 
 	'privacy' => 'legal/privacy',
 	'terms'   => 'legal/terms',

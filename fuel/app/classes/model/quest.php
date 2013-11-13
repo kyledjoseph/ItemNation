@@ -65,7 +65,7 @@ class Model_Quest extends \Orm\Model
 		),
 	);
 
-	protected $active_sort = 'recent';
+	
 
 	public function name()
 	{
@@ -95,67 +95,6 @@ class Model_Quest extends \Orm\Model
 	{
 		return date($format, $this->created_at);
 	}
-
-	public function is_public()
-	{
-		return $this->is_public == '1';
-	}
-
-	public function is_private()
-	{
-		return $this->is_public == '0';
-	}
-
-
-
-	public function purchase_within_option()
-	{
-		return round(($this->purchase_within() / 7));
-		//return ! empty($this->purchase_within) ? $this->purchase_within : '0';
-	}
-
-	public function purchase_within()
-	{
-		return ! empty($this->purchase_by)
-		 ? round(($this->purchase_by - time()) / 86400)
-		 : $this->purchase_within_value($this->purchase_within) / 86400;
-	}
-
-	public static function purchase_within_fields()
-	{
-		return array(
-			'0' => 'Not Sure',
-			'1' => '1 week',
-			'2' => '2 weeks',
-			'3' => '3 weeks',
-			'4' => '1 month',
-			//'5' => 'more than 1 month',
-		);
-	}
-
-	public static function purchase_within_value($index)
-	{
-		$values = array(
-			'0' => 0,
-			'1' => 604800,
-			'2' => 1209600,
-			'3' => 1814400,
-			'4' => 2419200,
-			//'5' => 'more than 1 month',
-		);
-
-		return $values[$index];
-	}
-
-	public function set_purchase_within($purchase_within)
-	{
-		$this->purchase_within = $purchase_within;
-		$this->purchase_by     = time() + $this->purchase_within_value($purchase_within);
-	}
-
-
-
-
 
 	public function default_thumb_url($width = 50, $height = 50)
 	{
@@ -188,6 +127,132 @@ class Model_Quest extends \Orm\Model
 	/**
 	 *
 	 */
+	public function access_type()
+	{
+		return $this->is_public == '1' ? 'public' : 'private';
+	}
+
+	/**
+	 *
+	 */
+	public function access_value($type)
+	{
+		return $type == 'public' ? '1' : '0';
+	}
+
+	/**
+	 *
+	 */
+	public function is_public()
+	{
+		return $this->access_type() == 'public';
+	}
+
+	/**
+	 *
+	 */
+	public function is_private()
+	{
+		return $this->access_type() == 'private';
+	}
+
+	/**
+	 *
+	 */
+	public function is_valid_access_type($type)
+	{
+		return in_array($type, array('public', 'private'));
+	}
+
+	/**
+	 *
+	 */
+	public function set_access($type)
+	{
+		if (! $this->is_valid_access_type($type))
+		{
+			throw new Exception("Invalid quest access type '{$type}', expecting be public or private");
+		}
+		
+		$this->is_public = $this->access_value($type);
+		return true;
+	}
+
+	/**
+	 *
+	 */
+	public function update_access($type)
+	{
+		return $this->set_access($type) and $this->save();
+	}
+
+
+
+	/**
+	 *
+	 */
+	public function purchase_within_option()
+	{
+		return round(($this->purchase_within() / 7));
+		//return ! empty($this->purchase_within) ? $this->purchase_within : '0';
+	}
+
+	public function purchase_within()
+	{
+		return ! empty($this->purchase_by)
+		 ? round(($this->purchase_by - time()) / 86400)
+		 : $this->purchase_within_value($this->purchase_within) / 86400;
+	}
+
+	public function purchase_within_text()
+	{
+		return "({$this->purchase_within()}) days";
+	}
+
+	public static function purchase_within_fields()
+	{
+		return array(
+			'0' => 'Not Sure',
+			'1' => '1 week',
+			'2' => '2 weeks',
+			'3' => '3 weeks',
+			'4' => '1 month',
+			//'5' => 'more than 1 month',
+		);
+	}
+
+	public static function purchase_within_value($index)
+	{
+		$values = array(
+			'0' => 0,
+			'1' => 604800,
+			'2' => 1209600,
+			'3' => 1814400,
+			'4' => 2419200,
+			//'5' => 'more than 1 month',
+		);
+
+		return $values[$index];
+	}
+
+	public function set_purchase_within($purchase_within)
+	{
+		return $this->purchase_within = $purchase_within
+			and $this->purchase_by = time() + $this->purchase_within_value($purchase_within);
+	}
+
+	public function update_purchase_within($purchase_within)
+	{
+		return $this->set_purchase_within($purchase_within) and $this->save();
+	}
+
+
+
+	/**
+	 * Quest Product sorting options
+	 */
+	protected $active_sort = 'recent'; // default sort
+
 	public function sort_options()
 	{
 		return array(
@@ -212,6 +277,7 @@ class Model_Quest extends \Orm\Model
 
 		$this->active_sort = $type;
 	}
+
 
 	public function active_sort()
 	{

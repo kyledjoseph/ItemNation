@@ -64,8 +64,8 @@ class Controller_Admin_Accounts extends Controller_Admin
 	{
 		$account = $this->_get_account($user_id);
 
-		$display_name = Input::post('display_name');		
-		$account->display_name = $display_name;
+		$fullname = Input::post('display_name');		
+		$account->fullname = $fullname;
 		$account->save();
 		$this->redirect("admin/accounts/view/{$account->id}", 'success', 'account information updated');
 	}

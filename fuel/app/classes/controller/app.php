@@ -20,8 +20,6 @@ class Controller_App extends Controller_Base
 		}
 	}
 
-
-
 	public function user_logged_in()
 	{
 		return isset($this->user);
@@ -35,50 +33,43 @@ class Controller_App extends Controller_Base
 		}
 	}
 
+	public function is_ajax_request()
+	{
+		return Input::is_ajax();
+	}
+
 	public function add_modal($content)
 	{
 		$this->template->modal.= $content;
 	}
 
-
-
-
-	private function _init_auth()
+	protected function _init_auth()
 	{
 		$this->auth = Auth::instance();
 	}
 
-	private function _init_user()
+	protected function _init_user()
 	{
-
-		// $p = Hybrid_Auth::getConnectedProviders();
-		// $c = count($p);
-		// throw new Exception("Error Processing Request $c", 1);
-		
-		// if (! Hybrid_Auth::isConnectedWith('facebook'))
-		// {
-		// 	throw new Exception("Error Processing Request", 1);
-		// }
-
-
-		if ($this->auth->check())
+		if (! $this->auth->check())
 		{
-			$user_id = $this->auth->get_user_id();
-			$this->user = Model_User::get_by_id($user_id);
+			return $this->user = null;
 		}
-		else
+		
+		list($driver, $user_id) = $this->auth->get_user_id();
+
+		if (! $this->user = Model_User::get_by_id($user_id) or 
+			! $provider = $this->user->get_provider('facebook') or 
+			! $provider->access_token_valid())
 		{
-			$this->user = null;
+			$this->auth->logout() and $this->redirect('user/auth/login/facebook');
 		}
 	}
 
-	private function _init_notice()
+	protected function _init_notice()
 	{
 		foreach (array('error', 'success', 'info') as $type)
 		{
-			$notice = Session::get_flash($type);
-
-			if (isset($notice))
+			if ($notice = Session::get_flash($type))
 			{
 				$this->template->notice = (object) array('type' => $type, 'message' => $notice);
 				break;
@@ -86,7 +77,7 @@ class Controller_App extends Controller_Base
 		}
 	}
 
-	private function _init_template()
+	protected function _init_template()
 	{
 		// set global template variables
 		$this->template->set_global('user', $this->user, false);
@@ -126,7 +117,7 @@ class Controller_App extends Controller_Base
 		}
 	}
 
-	private function _init_assets()
+	protected function _init_assets()
 	{
 		$env = strtolower(\Fuel::$env);
 

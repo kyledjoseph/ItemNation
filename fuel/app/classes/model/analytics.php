@@ -218,10 +218,10 @@ class Model_Analytics extends \Model
 		
 		if ($type == 'users')
 		{
-			$csv = 'id,username,email,display_name,avatar_type,last_login,fb_friends_last_updated,created_at,updated_at' . "\n";
+			$csv = 'id,username,email,display_name(),avatar_type,last_login,fb_friends_last_updated,created_at,updated_at' . "\n";
 			foreach ($this->get_signups() as $user)
 			{
-				$csv.= "{$user->id},{$user->username},{$user->email},{$user->display_name},{$user->avatar_type},{$user->last_login},{$user->fb_friends_last_updated},{$user->created_at},{$user->updated_at}\n";
+				$csv.= "{$user->id},{$user->username},{$user->email},{$user->display_name()},{$user->avatar_type},{$user->last_login},{$user->fb_friends_last_updated},{$user->created_at},{$user->updated_at}\n";
 			}
 			return $csv;
 		}
@@ -231,7 +231,7 @@ class Model_Analytics extends \Model
 			$csv = 'id,url,user_id,user_name,name,description,purchase_within,purchase_by,default_product_id,is_public,created_at,updated_at' . "\n";
 			foreach ($this->get_quests() as $quest)
 			{
-				$csv.= "{$quest->id},{$quest->url},{$quest->user_id},{$quest->user->display_name()},{$quest->name},{$quest->description},{$quest->purchase_within},{$quest->purchase_by},{$quest->default_product_id},{$quest->is_public},{$quest->created_at},{$quest->updated_at}";
+				$csv.= "{$quest->id},{$quest->url},{$quest->user_id},{$quest->user->display_name()()},{$quest->name},{$quest->description},{$quest->purchase_within},{$quest->purchase_by},{$quest->default_product_id},{$quest->is_public},{$quest->created_at},{$quest->updated_at}";
 			}
 			return $csv;
 		}
@@ -241,7 +241,7 @@ class Model_Analytics extends \Model
 			$csv = 'id,quest_id,quest_name,quest_user_id,quest_user_name,product_id,description,total_likes,total_dislikes,added_by,added_by_name,created_at,updated_at' . "\n";
 			foreach ($this->get_quest_products() as $quest_product)
 			{
-				$csv.= "{$qest_product->id},{$qest_product->quest_id},{$qest_product->quest->name},{$qest_product->quest->user_id},{$qest_product->quest->user->display_name()},{$qest_product->product_id},{$qest_product->description},{$qest_product->total_likes},{$qest_product->total_dislikes},{$qest_product->added_by},{$qest_product->user->display_name()},{$qest_product->created_at},{$qest_product->updated_at}";
+				$csv.= "{$qest_product->id},{$qest_product->quest_id},{$qest_product->quest->name},{$qest_product->quest->user_id},{$qest_product->quest->user->display_name()()},{$qest_product->product_id},{$qest_product->description},{$qest_product->total_likes},{$qest_product->total_dislikes},{$qest_product->added_by},{$qest_product->user->display_name()()},{$qest_product->created_at},{$qest_product->updated_at}";
 			}
 			return $csv;
 		}
@@ -251,7 +251,7 @@ class Model_Analytics extends \Model
 			$csv = 'id,quest_product_id,quest_product_name,user_id,user_name,comment,created_at,updated_at' . "\n";
 			foreach ($this->get_quest_product_comments() as $comment)
 			{
-				$csv.= "{$comment->id},{$comment->quest_product_id},{$comment->quest_product->quest->name},{$comment->user_id},{$comment->user->display_name()},{$comment->comment},{$comment->created_at},{$comment->updated_at}";
+				$csv.= "{$comment->id},{$comment->quest_product_id},{$comment->quest_product->quest->name},{$comment->user_id},{$comment->user->display_name()()},{$comment->comment},{$comment->created_at},{$comment->updated_at}";
 			}
 			return $csv;
 		}
@@ -262,7 +262,7 @@ class Model_Analytics extends \Model
 			$csv = 'id,quest_id,quest_name,user_id,user_name,body,created_at,updated_at' . "\n";
 			foreach ($this->get_quest_messages() as $message)
 			{
-				$csv.= "{$message->id},{$message->quest_id},{$message->quest->name},{$message->user_id},{$message->user->display_name()},{$message->body},{$message->created_at},{$message->updated_at}";
+				$csv.= "{$message->id},{$message->quest_id},{$message->quest->name},{$message->user_id},{$message->user->display_name()()},{$message->body},{$message->created_at},{$message->updated_at}";
 			}
 			return $csv;
 		}

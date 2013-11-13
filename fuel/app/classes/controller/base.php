@@ -1,10 +1,28 @@
 <?php
 
-class Controller_Base extends Controller_Hybrid
+class Controller_Base extends Controller_Template
 {
 	public function before()
 	{
 		parent::before();
+	}
+
+	/**
+	 * undefined_method
+	 */
+	public function after($response)
+	{
+		if ($response === null)
+		{
+			return parent::after($this->template);
+		}
+		
+		if (is_array($response))
+		{
+			return parent::after(json_encode($response));
+		}
+
+		return parent::after($response);
 	}
 
 	
