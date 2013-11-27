@@ -3,6 +3,10 @@
 <head>
 	<title>ShopGab - Shop Socially!</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:type"            content="social-cookbook:recipe" /> 
+        <meta property="og:url"             content="http://samples.ogp.me/136756249803614" /> 
+        <meta property="og:title"           content="Chocolate Pecan Pie" /> 
+        <meta property="og:image"           content="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/851565_496755187057665_544240989_n.jpg" /> 
 	<!-- Bootstrap -->
 	<script type="text/javascript" src="//use.typekit.net/kxv0tmh.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
