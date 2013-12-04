@@ -279,7 +279,27 @@ class Auth_Social
 			}
 		}
 
-		$user->save();
+    $new_user = $user->is_new();
+
+    $user->save();
+
+    if ($new_user) {
+      $content = View::forge('emails/welcome_message');
+
+      // if new user send welcome message
+      Service_Email::send(array(
+        'type'      => 'welcome_message',
+        'to_addr'   => $user->email,
+        'from_name' => 'ShopGab',
+        'from_addr' => 'info@shopgab.com',
+        'subject'   => 'Welcome to ShopGab!',
+        'body'      => View::forge('emails/template', array(
+          'content' => $content,
+        )),
+      ));
+      $user->welcome_message = true;
+      $user->save();
+    } // if
 
 		// attach this authentication to the new user
 		$provider = $user->link_provider(array(
